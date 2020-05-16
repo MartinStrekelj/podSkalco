@@ -19,5 +19,11 @@
             </div>
         </div>
     </div>
+    <script> 
+    const selected = document.getElementById("dashboard")
+    if (selected != undefined){
+        selected.classList.add("is-active");
+    }
+</script>
 </body>
 </html>

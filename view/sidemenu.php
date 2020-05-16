@@ -3,10 +3,10 @@
     Tekmovanja
   </p>
   <ul class="menu-list">
-    <li><a class="is-active" href="">Vsa tekmovanja</a>
+    <li><a id="dashboard" class="" href="<?= BASE_URL . "index"?>">Vsa tekmovanja</a>
       <ul>
-        <li><a href="<?= BASE_URL . "add-match"?>">Organiziraj novo tekmo</a></li>
-        <li><a href="<?= BASE_URL . "display_match"?>">Moje tekme</a></li>
+        <li><a id="new_match"  href="<?= BASE_URL . "add-match"?>">Organiziraj novo tekmo</a></li>
+        <li><a id="my_matches" href="<?= BASE_URL . "display_match"?>">Moje tekme</a></li>
       </ul>
     </li>
   </ul>
@@ -14,8 +14,8 @@
     Informacije
   </p>
   <ul class="menu-list">
-    <li><a href="<?= BASE_URL . "players?id="?>">Moj profil</a></li>
-    <li><a href="<?= BASE_URL . "players?id="?>">Vsi igralci</a></li>
-    <li><a href="<?= BASE_URL . "fields"?>">Pregled igrišč</a></li>
+    <li><a id="my_profile"  href="<?= BASE_URL . "players?id="?>">Moj profil</a></li>
+    <li><a id="all_players" href="<?= BASE_URL . "players?id="?>">Vsi igralci</a></li>
+    <li><a id="all_fields"  href="<?= BASE_URL . "fields"?>">Pregled igrišč</a></li>
   </ul>
 </aside>

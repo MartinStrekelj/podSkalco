@@ -3,7 +3,7 @@
 
 require_once("ViewHelper.php");
 
-class AppController {
+class RouteController {
 
     public static function index(){
         ViewHelper::render("view/dashboard.php");

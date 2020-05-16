@@ -3,8 +3,8 @@
 session_start();
 
 require_once("controller/UserController.php");
-
-require_once("controller/AppController.php");
+require_once("controller/RouteController.php");
+require_once("controller/MatchController.php");
 
 define("BASE_URL", $_SERVER["SCRIPT_NAME"] . "/");
 define("ASSETS_URL", rtrim($_SERVER["SCRIPT_NAME"], "index.php") . "assets/");
@@ -14,7 +14,7 @@ $path = isset($_SERVER["PATH_INFO"]) ? trim($_SERVER["PATH_INFO"], "/") : "";
 $urls = [
 
     "index" => function(){
-        AppController::index();
+        RouteController::index();
     },
 
     "login" => function (){
@@ -28,6 +28,10 @@ $urls = [
     "registration" => function() {
         UserController::showRegistrationForm();
     },
+
+    "add-match" => function() {
+        MatchController::showAddForm();
+    }
 
 ];
 
