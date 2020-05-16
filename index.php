@@ -4,6 +4,8 @@ session_start();
 
 require_once("controller/UserController.php");
 
+require_once("controller/AppController.php");
+
 define("BASE_URL", $_SERVER["SCRIPT_NAME"] . "/");
 define("ASSETS_URL", rtrim($_SERVER["SCRIPT_NAME"], "index.php") . "assets/");
 
@@ -16,11 +18,15 @@ $urls = [
     },
 
     "login" => function (){
-        UserController::login();
+        UserController::showLoginForm();
     },
 
     "" => function () {
-        ViewHelper::redirect(BASE_URL . "login");
+        ViewHelper::redirect(BASE_URL . "index");
+    },
+
+    "registration" => function() {
+        UserController::showRegistrationForm();
     },
 
 ];

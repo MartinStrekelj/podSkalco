@@ -11,7 +11,7 @@
     <div class="hero is-fullheight">
     <div class="hero-title">
         <div class="container">
-            <p class="title is-1 is spaced">
+            <p class="title is-1 is-spaced has-text-info">
                     Badminton Pod Skalco <span class="icon is-large"><i class="fas fa-spa"></i></span>
             </p>
             <p class="subtitle is-3">
@@ -35,17 +35,16 @@
                 </div>
                 <div class="field is-grouped is-grouped-right">
                 <div class="control">
-                    <a href="<?=BASE_URL . "homepage" ?>" class="button is-link is-medium">Prijava</a>
+                    <a href="<?=BASE_URL . "index" ?>" class="button is-info is-medium">Prijava</a>
                 </div>
                 <div class="control">
-                    <a href="<?=BASE_URL . "homepage" ?>" class="button is-link is-medium">Vstopi kot gost</a>
+                    <a href="<?=BASE_URL . "index" ?>" class="button is-info is-medium">Vstopi kot gost</a>
                 </div>
                 </div>
                 </form>
                 <p class="title is-3">Registracija</p>
-                <p class="subtitle is-4">Če bi se radi pridružili badminton društvu "Pod Skalco" se <a style="text-decoration:underline;" >registriraj.</a></p>
-                <p class="title is-3">Vstop kot gost</p>
-                <p class="subtitle is-4">Če se prijavite kot gost, vam bo na volje le ogled odprtih tekmovanj.</p>
+                <p class="subtitle is-4">Če bi se radi pridružili badminton društvu "Pod Skalco" se 
+                    <a style="text-decoration:underline;" href="<?= BASE_URL . "registration"?>">registriraj.</a></p>
             </div>
         </div>
     </div>
