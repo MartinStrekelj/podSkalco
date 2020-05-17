@@ -23,27 +23,52 @@
                 <span class="icon is-small is-left">
                 <i class="fas fa-heading"></i>
                 </span>
-            <!-- </div>
-            <p class="help is-success">This username is available</p>
-            </div> -->
-            <div class="field" style="margin-top: 20px">
-            <label class="label">Opis tekme</label>
-            <textarea id="description" class="textarea is-info" placeholder="Povej ostalim igralcem na kaj se prijavljajo" rows="5"></textarea>
-            <!-- </div>
-            <p class="help is-danger">This email is invalid</p>
-            </div> -->
+
+                <div class="field" style="margin-top: 20px">
+                    <label class="label">Čas tekme</label>
+                    <div class="select">
+                    <select>
+                        <option value="8">8.05 - 9.00</option>
+                        <option value="9">9.05 - 10.00</option>
+                        <option value="10">10.05 - 11.00</option>
+                        <option value="11">11.05 - 12.00</option>
+                        <option value="12">12.05 - 13.05</option>
+                        <option value="13">13.05 - 14.00</option>
+                        <option value="14">14.05 - 15.00</option>
+                        <option value="15">15.05 - 16.00</option>
+                        <option value="16">16.05 - 17.00</option>
+                        <option value="17">17.05 - 18.00</option>
+                        <option value="18">18.05 - 19.00</option>
+                        <option value="19">19.05 - 20.00</option>
+                    </select>
+                    <span class="icon is-small is-left">
+                        <i class="far fa-clock"></i>
+                    </span>
+                    </div>
+
+                    <div class="field" style="margin-top: 20px">
+                        <label class="label">Datum tekmovanja</label>
+                            <div class="control has-icons-left has-icons-right">
+                                <input id="match_date" class="input" min="6/3/2020" type="date" required>
+                        <span class="icon is-small is-left">
+                        <i class="fas fa-calendar-check"></i>
+                        </span>
+                        </div>
 
             <div class="field" style="margin-top: 20px">
-            <label class="label">Igrišče</label>
-            <div class="control">
-                <div class="select">
-                <select>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                </select>
-                </div>
+                <label class="label">Opis tekme</label>
+                <textarea id="description" class="textarea is-info" placeholder="Povej ostalim igralcem na kaj se prijavljajo" rows="5"></textarea>
             </div>
+            <div class="field" style="margin-top: 20px">
+                <label class="label">Igrišče</label>
+                <div class="control">
+                    <div class="select">
+                    <select>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                    </select>
+                    </div>
             </div>
 
             <div class="field is-grouped" style="margin-top: 20px">
@@ -68,9 +93,10 @@
     resetForm = () => {
         const match_description = document.getElementById("description")
         const match_title = document.getElementById("match_title")
-        match_description.reset()
-        match_title.reset()
-
+        const match_date  = document.getElementById("match_date")
+        match_title.value = ""
+        match_description.value = ""
+        match_date.value = "mm/dd/yyyy"
     }
 
 </script>

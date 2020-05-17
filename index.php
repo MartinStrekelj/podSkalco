@@ -31,8 +31,14 @@ $urls = [
 
     "add-match" => function() {
         MatchController::showAddForm();
-    }
+    },
 
+    "players" => function() {
+        RouteController::showAllPlayers();
+    },
+    "display_match" => function(){
+        MatchController::displayAllMatches();
+    }
 ];
 
 try {
