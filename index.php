@@ -26,7 +26,11 @@ $urls = [
     },
 
     "registration" => function() {
-        UserController::showRegistrationForm();
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            UserController::register();
+        } else{
+            UserController::showRegistrationForm();
+        }
     },
 
     "add-match" => function() {

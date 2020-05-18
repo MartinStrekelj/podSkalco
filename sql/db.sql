@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 17, 2020 at 04:59 PM
+-- Generation Time: May 18, 2020 at 09:42 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.5
 
@@ -35,6 +35,13 @@ CREATE TABLE `Igralci` (
   `SEZONE` int(11) NOT NULL,
   `GSM` int(9) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `Igralci`
+--
+
+INSERT INTO `Igralci` (`PID`, `USERNAME`, `PASSWORD`, `PREDZNANJE`, `SEZONE`, `GSM`) VALUES
+(1, 'Admin', 'password1', 1, 0, 41330612);
 
 -- --------------------------------------------------------
 
@@ -96,7 +103,7 @@ ALTER TABLE `Tekme`
 -- AUTO_INCREMENT for table `Igralci`
 --
 ALTER TABLE `Igralci`
-  MODIFY `PID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `PID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `Igrisca`

@@ -22,19 +22,27 @@
                         <th>Igralec</th>
                         <th><abbr title="Odigrane sezone">Igralne sezone</abbr></th>
                         <th><abbr title="Znanje ob prijavi">Predznanje</abbr></th>
+                        <th>GSM</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Megi</td>
-                            <td>Škufca</td>
-                            <td>Začetnik</td>
-                        </tr>
-                        <tr>
-                            <td>Janez</td>
-                            <td>Škufca</td>
-                            <td>Profesionalec</td>
-                        </tr>
+                        <?php foreach ($players as $player): ?>
+                            <tr>
+                                <td><a href="<?= BASE_URL . "players?id=" . $player["PID"] ?>"><?= $player["USERNAME"]?></a></td>
+                                <td><?= $player["SEZONE"] ?> </td>
+                                <td><?php if ($player["PREDZNANJE"] == 1){
+                                            echo "Začetnik";
+                                        }
+                                        elseif ($player["PREDZNANJE"] == 2){
+                                            echo "Izkušen igralec";
+                                        }
+                                        else{
+                                            echo "Veteran";
+                                        }
+                                        ?></td>
+                                <td><?= $player["GSM"] ?></td>
+                            </tr>
+                        <?php endforeach; ?>
                     </tbody>
                 </div>
         </div>

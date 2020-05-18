@@ -12,20 +12,18 @@
     <div class="columns is-mobile is-centered">
         <div class="column is-half">
             <a href="<?= BASE_URL . "login" ?>" class="button is-danger"><span class="icon is-large is-left"><i class="fas fa-caret-left"></i></span>-  Pojdi nazaj</a>
+            <form action="<?= BASE_URL . "registration" ?>" method="POST">
             <div class="field" style="margin-top: 20px">
             <label class="label">Uporabniško ime</label>
             <div class="control has-icons-left has-icons-right">
-                <input class="input" type="text" placeholder="Vpiši svoje uporabniško ime!">
+                <input name="USERNAME" class="input" type="text" placeholder="Vpiši svoje uporabniško ime!">
                 <span class="icon is-small is-left">
                 <i class="fas fa-user"></i>
                 </span>
-            <!-- </div>
-            <p class="help is-success">This username is available</p>
-            </div> -->
             <div class="field" style="margin-top: 20px">
             <label class="label">Geslo</label>
             <div class="control has-icons-left has-icons-right">
-                <input class="input" type="test" placeholder="Izberi si geslo">
+                <input name="PASSWORD" class="input" type="test" placeholder="Izberi si geslo">
                 <span class="icon is-small is-left">
                 <i class="fas fa-unlock-alt"></i>
                 </span>
@@ -36,18 +34,20 @@
                 <span class="icon is-small is-left">
                 <i class="fas fa-unlock-alt"></i>
                 </span>
-            <!-- </div>
-            <p class="help is-danger">This email is invalid</p>
-            </div> -->
-
+                <label class="label">Telefonska številka</label>
+            <div class="control has-icons-left has-icons-right">
+                <input name="GSM" class="input" type="password" placeholder="GSM. npr 041242992">
+                <span class="icon is-small is-left">
+                <i class="fas fa-unlock-alt"></i>
+                </span>
             <div class="field" style="margin-top: 20px">
             <label class="label">Izkušnje in predznanje</label>
             <div class="control">
                 <div class="select">
-                <select>
-                    <option>Začetnik</option>
-                    <option>Izkušeni badmintonaš</option>
-                    <option>Veteran</option>
+                <select name="PREDZNANJE">
+                    <option value="1">Začetnik</option>
+                    <option value="2">Izkušeni badmintonaš</option>
+                    <option value="3">Veteran</option>
                 </select>
                 </div>
                 <div>
@@ -67,9 +67,10 @@
 
             <div class="field is-grouped" style="margin-top: 20px">
             <div class="control">
-                <button class="button is-link">Registracija</button>
+                <button type="submit" class="button is-link">Registracija</button>
             </div>
             </div>
+            </form>
         </div>
     </div>
     

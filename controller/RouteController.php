@@ -2,6 +2,7 @@
 <?php
 
 require_once("ViewHelper.php");
+require_once("Model/SkalcaDB.php");
 
 class RouteController {
 
@@ -9,6 +10,7 @@ class RouteController {
         ViewHelper::render("view/dashboard.php");
     }
     public static function showAllPlayers(){
-        ViewHelper::render("view/all-players.php");
+        $vars = ["players" => SkalcaDB::getAllPlayers()];
+        ViewHelper::render("view/all-players.php", $vars);
     }
 }
