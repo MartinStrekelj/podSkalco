@@ -48,12 +48,15 @@ class UserController {
             $isDataValid = $isDataValid && empty($error);
         }
 
-        $data["PASSWORD"] = hash("sha256", $data["PASSWORD"]);
 
         if ($isDataValid){
             SkalcaDB::register($data["USERNAME"], $data["PASSWORD"], $data["PREDZNANJE"], 0, $data["GSM"]);
             ViewHelper::redirect(BASE_URL . "login");
         }else{
+            var_dump($data["USERNAME"]);
+            var_dump($data["PASSWORD"]);
+            var_dump($data["PREDZNANJE"]);
+            var_dump($data["GSM"]);
             self::showRegistrationForm($data, $errors);
         }
         }

@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `Igralci` (
   `PID` int(11) NOT NULL,
   `USERNAME` varchar(30) NOT NULL,
-  `PASSWORD` varchar(30) NOT NULL,
+  `PASSWORD` varchar(10) NOT NULL,
   `PREDZNANJE` int(11) NOT NULL,
   `SEZONE` int(11) NOT NULL,
   `GSM` int(9) NOT NULL
@@ -54,7 +54,7 @@ CREATE TABLE `Igrisca` (
   `NAZIV` varchar(30) NOT NULL,
   `OPIS` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
+sha256
 -- --------------------------------------------------------
 
 --

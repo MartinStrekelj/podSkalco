@@ -23,15 +23,18 @@ class SkalcaDB{
 
     public static function register($USERNAME, $PASSWORD, $PREDZNANJE, $GSM){
         $db = DBInit::getInstance();
+        $SEZONA = 0;
         
         
         $statement = $db->prepare("INSERT INTO Igralci (USERNAME, PASSWORD, PREDZNANJE, SEZONE, GSM)
             VALUES (:username, :password, :predznanje, :sezone, :gsm)");
 
+        $PASSWORD = hash("crc32", $PASSWORD);
+
         $statement -> bindParam(":username", $USERNAME);
         $statement -> bindParam(":password", $PASSWORD);
         $statement -> bindParam(":predznanje", $PREDZNANJE);
-        $statement -> bindParam(":sezone", 0);
+        $statement -> bindParam(":sezone", $SEZONA );
         $statement -> bindParam(":gsm", $GSM);
         $statement -> execute();
     }
