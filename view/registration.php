@@ -23,21 +23,21 @@
             <div class="field" style="margin-top: 20px">
             <label class="label">Geslo</label>
             <div class="control has-icons-left has-icons-right">
-                <input required name="PASSWORD" class="input" type="test" placeholder="Izberi si geslo">
+                <input required name="PASSWORD" class="input" type="password" placeholder="Izberi si geslo">
                 <span class="icon is-small is-left">
                 <i class="fas fa-unlock-alt"></i>
                 </span>
                 <div class="field" style="margin-top: 20px">
             <label class="label">Ponovi geslo</label>
             <div class="control has-icons-left has-icons-right">
-                <input name="PASSWORD2" class="input" type="password" placeholder="Ponovi geslo">
+                <input name="PASSWORD2" class="input" type="password" placeholder="Ponovi geslo" onkeyup='check()'>
                 <span class="icon is-small is-left">
                 <i class="fas fa-unlock-alt"></i>
                 </span>
                 <div class="field" style="margin-top: 20px">
                 <label class="label">Telefonska številka</label>
                 <div class="control has-icons-left has-icons-right">
-                <input name="GSM" class="input" type="number" placeholder="GSM. npr 41242992">
+                <input name="GSM" class="input" type="text" placeholder="GSM. npr 041242992">
                 <span class="icon is-small is-left">
                 <i class="fas fa-mobile-alt"></i>
                 </span>
@@ -75,6 +75,14 @@
             </form>
         </div>
     </div>
-    
+    <script>
+        var check = function() {
+         if (document.getElementById('password').value == document.getElementById('confirm_password').value) {
+                // Matching
+         } else {
+                // NOT
+            }
+        }
+    </script>
 </body>
 </html>

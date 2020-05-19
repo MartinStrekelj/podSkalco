@@ -48,7 +48,6 @@ class UserController {
             $isDataValid = $isDataValid && empty($error);
         }
 
-
         if ($isDataValid){
             SkalcaDB::register($data["USERNAME"], $data["PASSWORD"], $data["PREDZNANJE"], 0, $data["GSM"]);
             ViewHelper::redirect(BASE_URL . "login");

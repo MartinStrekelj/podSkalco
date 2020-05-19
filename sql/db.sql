@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 18, 2020 at 09:42 PM
+-- Generation Time: May 19, 2020 at 04:23 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.5
 
@@ -30,18 +30,20 @@ SET time_zone = "+00:00";
 CREATE TABLE `Igralci` (
   `PID` int(11) NOT NULL,
   `USERNAME` varchar(30) NOT NULL,
-  `PASSWORD` varchar(10) NOT NULL,
+  `PASSWORD` varchar(30) NOT NULL,
   `PREDZNANJE` int(11) NOT NULL,
-  `SEZONE` int(11) NOT NULL,
-  `GSM` int(9) NOT NULL
+  `PRIDRUŽITEV` datetime NOT NULL DEFAULT current_timestamp(),
+  `GSM` varchar(9) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `Igralci`
 --
 
-INSERT INTO `Igralci` (`PID`, `USERNAME`, `PASSWORD`, `PREDZNANJE`, `SEZONE`, `GSM`) VALUES
-(1, 'Admin', 'password1', 1, 0, 41330612);
+INSERT INTO `Igralci` (`PID`, `USERNAME`, `PASSWORD`, `PREDZNANJE`, `PRIDRUŽITEV`, `GSM`) VALUES
+(1, 'Admin', 'password1', 1, '0000-00-00 00:00:00', '041330612'),
+(2, 'Martin', 'foo', 2, '0000-00-00 00:00:00', '041556128'),
+(3, 'Megi', 'ca985bfc', 1, '0000-00-00 00:00:00', '031267987');
 
 -- --------------------------------------------------------
 
@@ -54,7 +56,16 @@ CREATE TABLE `Igrisca` (
   `NAZIV` varchar(30) NOT NULL,
   `OPIS` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-sha256
+
+--
+-- Dumping data for table `Igrisca`
+--
+
+INSERT INTO `Igrisca` (`FID`, `NAZIV`, `OPIS`) VALUES
+(1, 'Žogica', 'Igrišče Žogica je pravokotno in označeno s črtami debeline 40 mm, na sredini pa ga ločuje mreža, ki je visoka 152 cm v sredini igrišča in 155 cm nad stranskimi črtami za igro dvojic. Pri igri posameznikov igrišče omejujeta notranji stranski črti in zadnja mejna črta, pri dvojicah pa zunanji stranski črti in zadnja mejna črta. Pri servisu je zadnja servisna črta pri dvojicah bližje prednji servisni črti, kot pri igri posameznikov.'),
+(2, 'Loparček', 'Igrišče Loparček je pravokotno in označeno s črtami debeline 40 mm, na sredini pa ga ločuje mreža, ki je visoka 152 cm v sredini igrišča in 155 cm nad stranskimi črtami za igro dvojic. Pri igri posameznikov igrišče omejujeta notranji stranski črti in zadnja mejna črta, pri dvojicah pa zunanji stranski črti in zadnja mejna črta. Pri servisu je zadnja servisna črta pri dvojicah bližje prednji servisni črti, kot pri igri posameznikov.'),
+(3, 'Arehek', 'Igrišče Arehek je pravokotno in označeno s črtami debeline 40 mm, na sredini pa ga ločuje mreža, ki je visoka 152 cm v sredini igrišča in 155 cm nad stranskimi črtami za igro dvojic. Pri igri posameznikov igrišče omejujeta notranji stranski črti in zadnja mejna črta, pri dvojicah pa zunanji stranski črti in zadnja mejna črta. Pri servisu je zadnja servisna črta pri dvojicah bližje prednji servisni črti, kot pri igri posameznikov.');
+
 -- --------------------------------------------------------
 
 --
@@ -103,13 +114,13 @@ ALTER TABLE `Tekme`
 -- AUTO_INCREMENT for table `Igralci`
 --
 ALTER TABLE `Igralci`
-  MODIFY `PID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `PID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `Igrisca`
 --
 ALTER TABLE `Igrisca`
-  MODIFY `FID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `FID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `Tekme`

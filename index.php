@@ -17,6 +17,10 @@ $urls = [
         RouteController::index();
     },
 
+    "fields" => function() {
+        RouteController::showFields();
+    },
+
     "login" => function (){
         UserController::showLoginForm();
     },

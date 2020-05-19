@@ -13,4 +13,9 @@ class RouteController {
         $vars = ["players" => SkalcaDB::getAllPlayers()];
         ViewHelper::render("view/all-players.php", $vars);
     }
+
+    public static function showFields(){
+        $vars = [ "fields" => SkalcaDB::getAllFields()];
+        ViewHelper::render("view/display-fields.php", $vars);
+    }
 }
