@@ -55,11 +55,24 @@ class SkalcaDB{
 
     public static function findUserByName($USERNAME){
         $db = DBinit::getInstance();
-        $statement = $db -> prepare("SELECT PID FROM Igralci WHERE USERNAME = :username");
+        $statement = $db -> prepare("SELECT PID, USERNAME FROM Igralci WHERE USERNAME = :username");
         $statement -> bindParam(":username", $USERNAME);
         $statement -> execute();
 
-        return $statement -> fetchAll();
-    } 
+        return $statement -> fetchObject();
+    }
+    
+    public static function validLoginAttempt($USERNAME, $PASSWORD){
+    $db = DBinit::getInstance();
 
+    $PASSWORD = hash("crc32", $PASSWORD);
+
+    $statement = $db -> prepare("SELECT COUNT(PID) FROM Igralci WHERE USERNAME = :username AND PASSWORD = :password");
+    $statement -> bindParam(":username", $USERNAME);
+    $statement -> bindParam(":password", $PASSWORD);
+
+    $statement -> execute();
+    return $statement -> fetchColumn(0) == 1;
+
+    }
 }

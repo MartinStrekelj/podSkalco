@@ -16,7 +16,7 @@
             <div class="field" style="margin-top: 20px">
             <label class="label">Uporabniško ime</label>
             <div  class="control has-icons-left has-icons-right">
-                <input required name="USERNAME" class="input" type="text" placeholder="Vpiši svoje uporabniško ime!" value="<?= $data["USERNAME"] ?>">
+                <input required name="USERNAME" class="input" type="text" placeholder="Vpiši svoje uporabniško ime!" value="<?= $user["USERNAME"] ?>">
                 <span class="icon is-small is-left">
                 <i class="fas fa-user"></i>
                 </span>
@@ -26,7 +26,7 @@
             <div class="field" style="margin-top: 20px">
             <label class="label">Geslo</label>
             <div class="control has-icons-left has-icons-right">
-                <input id = "password" required name="PASSWORD" class="input" type="password" placeholder="Izberi si geslo" value="<?= $data["PASSWORD"] ?>" onkeyup="check()">
+                <input id = "password" required name="PASSWORD" class="input" type="password" placeholder="Izberi si geslo" value="<?= $user["PASSWORD"] ?>" onkeyup="check()">
                 <span class="icon is-small is-left">
                 <i class="fas fa-unlock-alt"></i>
                 </span>
@@ -36,7 +36,7 @@
                 <div class="field" style="margin-top: 20px">
             <label class="label">Ponovi geslo</label>
             <div class="control has-icons-left has-icons-right">
-                <input id="confirm-password" name="CONFIRM_PASSWORD"  class="input" type="password" placeholder="Ponovi geslo" value="<?= $data["CONFIRM_PASSWORD"] ?>" onkeyup="check();">
+                <input id="confirm-password" name="CONFIRM_PASSWORD"  class="input" type="password" placeholder="Ponovi geslo" value="<?= $user["CONFIRM_PASSWORD"] ?>" onkeyup="check();">
                 <span class="icon is-small is-left">
                 <i class="fas fa-unlock-alt"></i>
                 </span>
@@ -46,7 +46,7 @@
                 <div class="field" style="margin-top: 20px">
                 <label class="label">Telefonska številka</label>
                 <div class="control has-icons-left has-icons-right">
-                <input name="GSM" class="input" type="text" placeholder="GSM. npr 041242992" value="<?= $data["GSM"] ?>">
+                <input name="GSM" class="input" type="text" placeholder="GSM. npr 041242992" value="<?= $user["GSM"] ?>">
                 <span class="icon is-small is-left">
                     <i class="fas fa-mobile-alt"></i>
                 </span>

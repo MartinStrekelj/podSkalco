@@ -1,16 +1,43 @@
 
 <?php
-
 require_once("ViewHelper.php");
 
 class UserController {
 
-    public static function showLoginForm(){
-        ViewHelper::render("view/login.php");
+    public static function showLoginForm($data=[]){
+        if (empty($data)){
+            $data = [
+                "USERNAME" => "",
+            ];
+        }
+
+        $vars = ["user" => $data];
+
+        ViewHelper::render("view/login.php", $vars);
     }
 
     public static function login(){
-        ViewHelper::render("view/login.php");
+        $rules = [
+            "USERNAME" => [
+                "filter" => FILTER_VALIDATE_REGEXP,
+                "options" => ["regexp" => "/^[ <a-zA-Z0-9>]+$/"]
+            ],
+            // we convert HTML special characters
+            "PASSWORD" => FILTER_SANITIZE_SPECIAL_CHARS
+        ];
+
+        $data = filter_input_array(INPUT_POST, $rules);
+
+        if (SkalcaDB::validLoginAttempt($data["USERNAME"], $data["PASSWORD"])){
+            $user = SkalcaDB::findUserByName($data["USERNAME"]);
+            $_SESSION["user_id"] = $user -> PID;
+            $_SESSION["username"] = $user -> USERNAME;
+            ViewHelper::render("view/dashboard.php");
+        } else{
+            ViewHelper::render("view/login.php", [
+                "errorMessage" => "Napačno ime ali geslo."
+            ]);
+        }
     }
 
     public static function showRegistrationForm($data = [], $errors = []){
@@ -59,7 +86,6 @@ class UserController {
         $data = filter_input_array(INPUT_POST, $rules);
         
         $hits = SkalcaDB::findUserByName($data["USERNAME"]);
-        var_dump(count($hits));
         
 
         $errors["USERNAME"] = $data["USERNAME"] === false  ? "Izberite si uporabniško ime: dovoljene so samo črke in številke" : "";
@@ -67,7 +93,7 @@ class UserController {
 
         $errors["PASSWORD"] = empty($data["PASSWORD"]) ? "Vpiši geslo!" : "";
         $errors["PASSWORD"] = !($data["PASSWORD"] == $data["CONFIRM_PASSWORD"]) ? "Gesli se nista ujemali. Bodite pozorni pri črkovanju!" : "";
-        $errors["GSM"] = $data["GSM"] === false ? "Vpišite svoj GSM. Številka mora biti sestavljena iz 9števk npr. 041-551-691" : "";
+        $errors["GSM"] = $data["GSM"] === false ? "Vpišite svoj GSM. Številka mora biti sestavljena iz 9števk npr. 041551691" : "";
 
 
 
@@ -78,7 +104,7 @@ class UserController {
 
         if ($isDataValid){
             SkalcaDB::register($data["USERNAME"], $data["PASSWORD"], $data["PREDZNANJE"], $data["GSM"]);
-            ViewHelper::redirect(BASE_URL . "login");
+            ViewHelper::render("view/login.php", ["registerMessage" => "Registracije je bila uspešna. Vpišite se!"]);
         }else{
             self::showRegistrationForm($data, $errors);
         }

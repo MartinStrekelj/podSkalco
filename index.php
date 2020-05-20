@@ -22,7 +22,11 @@ $urls = [
     },
 
     "login" => function (){
-        UserController::showLoginForm();
+        if ($_SERVER["REQUEST_METHOD"] == "POST"){
+            UserController::login();
+        }else{
+            UserController::showLoginForm();
+        }
     },
 
     "" => function () {

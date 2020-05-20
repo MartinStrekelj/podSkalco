@@ -17,25 +17,39 @@
             <p class="subtitle is-3">
                     Prijava članov
             </p>
+            <?php if (!empty($errorMessage)): ?>
+                <div class="notification is-danger">
+                    <button class="delete"></button>
+                    <?= $errorMessage ?>
+                </div>
+            <?php endif; ?>
+
+            <?php if (!empty($registerMessage)): ?>
+                <div class="notification is-success">
+                    <button class="delete"></button>
+                    <?= $registerMessage ?>
+                </div>
+            <?php endif; ?>
+
         </div>
         <div class="hero-body">
             <div class="container">
-            <form action="<?=BASE_URL . "login"?>">
+            <form action="<?=BASE_URL . "login"?>" method="POST">
                 <div class="field">
                 <label class="label" style="font-size: 1.3em">Ime</label>
                 <div class="control">
-                    <input class="input is-info is-medium" type="text" placeholder="Uporabniško ime">
+                    <input name="USERNAME" autocomplete="off" class="input is-info is-medium" type="text" placeholder="Uporabniško ime">
                 </div>
                 </div>
                 <div class="field">
                 <label class="label" style="font-size: 1.3em">Geslo</label>
                 <div class="control">
-                    <input class="input is-info is-medium" type="password" placeholder="Svojega gesla ne deli z nikomer!">
+                    <input name="PASSWORD" class="input is-info is-medium" type="password" placeholder="Svojega gesla ne deli z nikomer!">
                 </div>
                 </div>
                 <div class="field is-grouped is-grouped-right">
                 <div class="control">
-                    <a href="<?=BASE_URL . "index" ?>" class="button is-info is-medium">Prijava</a>
+                    <button type="submit" class="button is-info is-medium">Prijava</a>
                 </div>
                 <div class="control">
                     <a href="<?=BASE_URL . "index" ?>" class="button is-info is-medium">Vstopi kot gost</a>
@@ -48,5 +62,16 @@
             </div>
         </div>
     </div>
+    <script>
+         document.addEventListener('DOMContentLoaded', () => {
+        (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
+            $notification = $delete.parentNode;
+
+            $delete.addEventListener('click', () => {
+            $notification.parentNode.removeChild($notification);
+            });
+        });
+        });
+    </script>
 </body>
 </html>
