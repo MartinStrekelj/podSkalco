@@ -32,20 +32,34 @@ class SkalcaDB{
 
     public static function register($USERNAME, $PASSWORD, $PREDZNANJE, $GSM){
         $db = DBInit::getInstance();
-        $SEZONA = 0;
         
         
-        $statement = $db->prepare("INSERT INTO Igralci (USERNAME, PASSWORD, PREDZNANJE, SEZONE, GSM)
-            VALUES (:username, :password, :predznanje, :sezone, :gsm)");
+        $statement = $db->prepare("INSERT INTO Igralci (USERNAME, PASSWORD, PREDZNANJE, GSM)
+            VALUES (:username, :password, :predznanje, :gsm)");
 
         $PASSWORD = hash("crc32", $PASSWORD);
 
         $statement -> bindParam(":username", $USERNAME);
         $statement -> bindParam(":password", $PASSWORD);
         $statement -> bindParam(":predznanje", $PREDZNANJE);
-        $statement -> bindParam(":sezone", $SEZONA );
         $statement -> bindParam(":gsm", $GSM);
         $statement -> execute();
     }
+
+    // public static function findUserByName ($USERNAME){
+    //     $db = DBinit::getInstance()
+
+    //     $statement = $db ->prepare("SELECT USERNAME")
+
+    // }
+
+    public static function findUserByName($USERNAME){
+        $db = DBinit::getInstance();
+        $statement = $db -> prepare("SELECT PID FROM Igralci WHERE USERNAME = :username");
+        $statement -> bindParam(":username", $USERNAME);
+        $statement -> execute();
+
+        return $statement -> fetchAll();
+    } 
 
 }
