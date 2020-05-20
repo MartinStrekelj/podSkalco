@@ -11,7 +11,7 @@
  
     <div class="columns is-mobile is-centered">
         <div class="column is-half">
-            <a href="<?= BASE_URL . "login" ?>" class="button is-danger"><span class="icon is-large is-left"><i class="fas fa-caret-left"></i></span>-  Pojdi nazaj</a>
+            <a href="<?= BASE_URL . "login" ?>" class="button is-danger"><span class="icon is-large is-left"><i class="fas fa-caret-left"></i></span> <span>Pojdi nazaj</span> </a>
             <form action="<?= BASE_URL . "registration" ?>" method="POST">
             <div class="field" style="margin-top: 20px">
             <label class="label">Uporabniško ime</label>
@@ -53,6 +53,19 @@
                 </div>
                 <div>
                     <p class="help is-danger"><?= $errors["GSM"]  ?></p>
+                </div>
+                <div class="field" style="margin-top: 20px">
+                <label class="label">Spol</label>
+                <div class="control">
+                <label class="radio">
+                    <input type="radio" name="SPOL" value="M" checked>
+                    Moški
+                </label>
+                <label class="radio">
+                    <input type="radio" name="SPOL" value="Ž">
+                    Ženski
+                </label>
+                </div>
                 </div>
             <div class="field" style="margin-top: 20px">
             <label class="label">Izkušnje in predznanje</label>

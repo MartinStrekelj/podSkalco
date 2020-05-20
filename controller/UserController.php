@@ -80,7 +80,8 @@ class UserController {
             [
                 "filter" => FILTER_VALIDATE_REGEXP,
                 "options" =>  ["regexp" => "/^[ <0-9>]*$/"]
-            ]
+            ],
+            "SPOL" => FILTER_SANITIZE_SPECIAL_CHARS
         ];
 
         $data = filter_input_array(INPUT_POST, $rules);
@@ -89,8 +90,7 @@ class UserController {
         
 
         $errors["USERNAME"] = $data["USERNAME"] === false  ? "Izberite si uporabniško ime: dovoljene so samo črke in številke" : "";
-        $errors["USERNAME"] = (count($hits) != 0) ? "Uporabniško ime že obstaja" : "";
-
+        $errors["USERNAME"] = (!empty($hits)) ? "Uporabniško ime že obstaja" : "";
         $errors["PASSWORD"] = empty($data["PASSWORD"]) ? "Vpiši geslo!" : "";
         $errors["PASSWORD"] = !($data["PASSWORD"] == $data["CONFIRM_PASSWORD"]) ? "Gesli se nista ujemali. Bodite pozorni pri črkovanju!" : "";
         $errors["GSM"] = $data["GSM"] === false ? "Vpišite svoj GSM. Številka mora biti sestavljena iz 9števk npr. 041551691" : "";
@@ -101,13 +101,17 @@ class UserController {
         foreach ($errors as $error) {
             $isDataValid = $isDataValid && empty($error);
         }
-
         if ($isDataValid){
-            SkalcaDB::register($data["USERNAME"], $data["PASSWORD"], $data["PREDZNANJE"], $data["GSM"]);
+            SkalcaDB::register($data["USERNAME"], $data["PASSWORD"], $data["PREDZNANJE"], $data["GSM"], $data["SPOL"]);
             ViewHelper::render("view/login.php", ["registerMessage" => "Registracije je bila uspešna. Vpišite se!"]);
         }else{
             self::showRegistrationForm($data, $errors);
         }
+        }
+
+        public static function logout(){
+            session_destroy();
+            ViewHelper::redirect(BASE_URL . "");
         }
 
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 19, 2020 at 04:23 PM
+-- Generation Time: May 20, 2020 at 04:53 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.5
 
@@ -31,19 +31,24 @@ CREATE TABLE `Igralci` (
   `PID` int(11) NOT NULL,
   `USERNAME` varchar(30) NOT NULL,
   `PASSWORD` varchar(30) NOT NULL,
+  `GSM` varchar(9) DEFAULT NULL,
+  `SPOL` char(1) DEFAULT NULL,
   `PREDZNANJE` int(11) NOT NULL,
-  `PRIDRUŽITEV` datetime NOT NULL DEFAULT current_timestamp(),
-  `GSM` varchar(9) DEFAULT NULL
+  `PRIDRUŽITEV` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `Igralci`
 --
 
-INSERT INTO `Igralci` (`PID`, `USERNAME`, `PASSWORD`, `PREDZNANJE`, `PRIDRUŽITEV`, `GSM`) VALUES
-(1, 'Admin', 'password1', 1, '0000-00-00 00:00:00', '041330612'),
-(2, 'Martin', 'foo', 2, '0000-00-00 00:00:00', '041556128'),
-(3, 'Megi', 'ca985bfc', 1, '0000-00-00 00:00:00', '031267987');
+INSERT INTO `Igralci` (`PID`, `USERNAME`, `PASSWORD`, `GSM`, `SPOL`, `PREDZNANJE`, `PRIDRUŽITEV`) VALUES
+(1, 'Admin', 'password1', '41330612', 'M', 1, '0000-00-00 00:00:00'),
+(2, 'Martin', 'foo', '0', 'M', 2, '0000-00-00 00:00:00'),
+(3, 'Megi', 'ca985bfc', '0', 'Ž', 1, '0000-00-00 00:00:00'),
+(5, 'SuperBadminton', 'accf8b33', '04133012', 'M', 1, '2020-05-19 18:10:06'),
+(8, 'User1', '7e9a4030', '555413222', 'Ž', 1, '2020-05-20 14:30:01'),
+(9, 'User15', '219a402c', '421442112', 'M', 3, '2020-05-20 14:54:05'),
+(10, 'Megi1', 'eed7de5c', '04133012', 'Ž', 2, '2020-05-20 14:56:40');
 
 -- --------------------------------------------------------
 
@@ -114,7 +119,7 @@ ALTER TABLE `Tekme`
 -- AUTO_INCREMENT for table `Igralci`
 --
 ALTER TABLE `Igralci`
-  MODIFY `PID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `PID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `Igrisca`

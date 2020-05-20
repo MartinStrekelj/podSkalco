@@ -6,7 +6,7 @@ class SkalcaDB{
     public static function getAllPlayers() {
         $db = DBInit::getInstance();
 
-        $statement = $db->prepare("SELECT PID, USERNAME, PREDZNANJE, PRIDRUŽITEV, GSM FROM Igralci");
+        $statement = $db->prepare("SELECT * FROM Igralci");
         $statement->execute();
 
         return $statement->fetchAll();
@@ -24,18 +24,18 @@ class SkalcaDB{
     public static function getAllMatches() {
         $db = DBInit::getInstance();
 
-        $statement = $db->prepare("SELECT MID, FID, ORGANIZATOR, URA, DATUM, OPISTEKME FROM Tekme");
+        $statement = $db->prepare("SELECT * FROM Tekme");
         $statement->execute();
 
         return $statement->fetchAll();
     }
 
-    public static function register($USERNAME, $PASSWORD, $PREDZNANJE, $GSM){
+    public static function register($USERNAME, $PASSWORD, $PREDZNANJE, $GSM, $SPOL){
         $db = DBInit::getInstance();
         
         
-        $statement = $db->prepare("INSERT INTO Igralci (USERNAME, PASSWORD, PREDZNANJE, GSM)
-            VALUES (:username, :password, :predznanje, :gsm)");
+        $statement = $db->prepare("INSERT INTO Igralci (USERNAME, PASSWORD, GSM, SPOL, PREDZNANJE)
+            VALUES (:username, :password, :gsm, :spol, :predznanje)");
 
         $PASSWORD = hash("crc32", $PASSWORD);
 
@@ -43,15 +43,9 @@ class SkalcaDB{
         $statement -> bindParam(":password", $PASSWORD);
         $statement -> bindParam(":predznanje", $PREDZNANJE);
         $statement -> bindParam(":gsm", $GSM);
+        $statement -> bindParam(":spol", $SPOL);
         $statement -> execute();
     }
-
-    // public static function findUserByName ($USERNAME){
-    //     $db = DBinit::getInstance()
-
-    //     $statement = $db ->prepare("SELECT USERNAME")
-
-    // }
 
     public static function findUserByName($USERNAME){
         $db = DBinit::getInstance();
@@ -60,6 +54,21 @@ class SkalcaDB{
         $statement -> execute();
 
         return $statement -> fetchObject();
+    }
+
+    public static function getPlayer($PID){
+        $db = DBinit::getInstance();
+        $statement = $db -> prepare("SELECT * FROM Igralci WHERE PID = :pid");
+        $statement -> bindParam(":pid", $PID, PDO::PARAM_INT);
+        $statement -> execute();
+
+        $player = $statement -> fetch();
+
+        if ($player != null) {
+            return $player;
+        } else {
+            throw new InvalidArgumentException("No record with id $PID");
+        }
     }
     
     public static function validLoginAttempt($USERNAME, $PASSWORD){

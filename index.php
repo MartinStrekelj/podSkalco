@@ -46,11 +46,15 @@ $urls = [
     },
 
     "players" => function() {
-        RouteController::showAllPlayers();
+        RouteController::showPlayers();
     },
     "display_match" => function(){
         MatchController::displayAllMatches();
-    }
+    },
+
+    "logout" => function(){
+        UserController::logout();
+    },
 ];
 
 try {

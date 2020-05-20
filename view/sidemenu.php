@@ -1,4 +1,5 @@
 <aside class="menu is-mobile is-primary" style="margin-left:20px;">
+<?php if(isset($_SESSION["user_id"])): ?>
   <p class="menu-label">
     Tekmovanja
   </p>
@@ -14,8 +15,21 @@
     Informacije
   </p>
   <ul class="menu-list">
-    <li><a id="my_profile"  href="<?= BASE_URL . "players?id="?>">Moj profil</a></li>
+    <li><a id="my_profile"  href="<?= BASE_URL . "players?id=" . $_SESSION["user_id"]?>">Moj profil</a></li>
     <li><a id="all_players" href="<?= BASE_URL . "players"?>">Vsi igralci</a></li>
     <li><a id="all_fields"  href="<?= BASE_URL . "fields"?>">Pregled igrišč</a></li>
   </ul>
+<?php else: ?>
+  <p class="menu-label">
+    Tekmovanja
+  </p>
+  <ul class="menu-list">
+    <li><a id="dashboard" class="" href="<?= BASE_URL . "index"?>">Vsa tekmovanja</a>
+  <p class="menu-label">
+    Informacije
+  </p>
+  <ul class="menu-list">
+    <li><a id="all_fields"  href="<?= BASE_URL . "fields"?>">Pregled igrišč</a></li>
+  </ul>
+<?php endif; ?>
 </aside>
