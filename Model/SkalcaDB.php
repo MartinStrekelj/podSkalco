@@ -84,4 +84,29 @@ class SkalcaDB{
     return $statement -> fetchColumn(0) == 1;
 
     }
+
+    public static function update($PID, $USERNAME, $PASSWORD, $PREDZNANJE, $GSM, $SPOL){
+        $db = DBInit::getInstance();
+        
+        
+        $statement = $db->prepare("UPDATE Igralci SET USERNAME = :username, PASSWORD = :password, GSM = :gsm, SPOL = :spol
+            WHERE PID = :pid");
+
+        $PASSWORD = hash("crc32", $PASSWORD);
+        $statement -> bindParam(":pid", $PID);
+        $statement -> bindParam(":username", $USERNAME);
+        $statement -> bindParam(":password", $PASSWORD);
+        $statement -> bindParam(":gsm", $GSM);
+        $statement -> bindParam(":spol", $SPOL);
+        $statement -> execute();
+    }
+
+    public static function deleteUser($PID){
+        $db = DBInit::getInstance();
+        $statement = $db->prepare("DELETE FROM Igralci
+            WHERE PID = :pid");
+        $statement -> bindParam(":pid", $PID);
+        $statement -> execute();
+    }
+
 }

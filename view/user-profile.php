@@ -32,10 +32,17 @@
                         echo "Veteran";
                     }
                     ?></span></p>
-                    <div class="buttons are-medium">
-                        <a href="" class="button is-warning">Uredi profil</a>
-                        <a href="" class="button is-danger">Izbriši profil</a>
-                    </div>
+                    <hr>
+                    <a href="<?= BASE_URL . "edit-profile" ?>" class="button is-warning">Uredi profil</a>
+                    <hr>
+                    <form action="<?= BASE_URL . "delete-user" ?>" method="post">
+                        <label class="checkbox">
+                        <input name="confirm_delete" type="checkbox" required>
+                            Prepričan sem, da želim izbrisati profil.
+                        </label>
+                        <br>
+                        <button type="submit" style="margin-top: 20px" class="button is-danger">Izbriši profil</button>
+                        </form>
                 </div>
         </div>
     </div>

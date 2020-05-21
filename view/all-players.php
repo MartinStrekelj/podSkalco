@@ -16,6 +16,12 @@
         <div class="column">
             <div class="columns is-centered">
                 <div class="column is-10">
+                <?php if (!empty($updateMessage)): ?>
+                <div class="notification is-warning">
+                    <button class="delete"></button>
+                    <?= $updateMessage ?>
+                </div>
+            <?php endif; ?>
                 <table class="table is-fullwidth">
                     <thead>
                         <tr>
@@ -49,6 +55,16 @@
     if (selected != undefined){
         selected.classList.add("is-active");
     }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
+            $notification = $delete.parentNode;
+
+            $delete.addEventListener('click', () => {
+            $notification.parentNode.removeChild($notification);
+            });
+        });
+        });
 
 </script>
 </body>

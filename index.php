@@ -55,6 +55,21 @@ $urls = [
     "logout" => function(){
         UserController::logout();
     },
+
+    "edit-profile" => function(){
+        if ($_SERVER["REQUEST_METHOD"] == "POST"){
+            UserController::editProfile();
+        }else{
+            UserController::showEditForm();
+        }
+    },
+
+    "delete-user" => function(){
+        if ($_SERVER["REQUEST_METHOD"] == "POST"){
+            UserController::deleteUser();
+        }
+    } 
+
 ];
 
 try {
