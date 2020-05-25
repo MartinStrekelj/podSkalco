@@ -16,18 +16,18 @@
         <div class="column">
             <div class="columns is-centered">
                 <div class="column is-8">
+                <form action="<?= BASE_URL . "add-match" ?>" method="post">
                 <div class="field" style="margin-top: 20px">
             <label class="label">Naziv tekme</label>
             <div class="control has-icons-left has-icons-right">
-                <input id="match_title" class="input" type="text" placeholder="npr. Petkova liga">
+                <input id="match_title" class="input" type="text" placeholder="npr. Petkova liga" required>
                 <span class="icon is-small is-left">
                 <i class="fas fa-heading"></i>
                 </span>
-
                 <div class="field" style="margin-top: 20px">
                     <label class="label">Čas tekme</label>
                     <div class="select">
-                    <select>
+                    <select required>
                         <option value="8">8.05 - 9.00</option>
                         <option value="9">9.05 - 10.00</option>
                         <option value="10">10.05 - 11.00</option>
@@ -54,7 +54,9 @@
                         <i class="fas fa-calendar-check"></i>
                         </span>
                         </div>
-
+                    <div>
+                        <p class="help is-info">Priporočamo izbiro datuma z pomočjo koledarčka</p>
+                    </div>
             <div class="field" style="margin-top: 20px">
                 <label class="label">Opis tekme</label>
                 <textarea id="description" class="textarea is-info" placeholder="Povej ostalim igralcem na kaj se prijavljajo" rows="5"></textarea>
@@ -64,19 +66,20 @@
                 <div class="control">
                     <div class="select">
                     <select>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
+                        <?php foreach ($fields as $field): ?>
+                            <option value="<?= $field["FID"] ?>"> <?= $field["NAZIV"] ?></option>
+                        <?php endforeach; ?>
                     </select>
                     </div>
             </div>
 
             <div class="field is-grouped" style="margin-top: 20px">
             <div class="control">
-                <button class="button is-link">Organiziraj</button>
+                <button type="submit" class="button is-link">Organiziraj</button>
             </div>
+            </form>
             <div class="control">
-                <button onclick="resetForm()" class="button is-link is-inverted">Pobriši vse</button>
+                <button onclick="resetForm()" class="button is-danger is-inverted">Pobriši vse</button>
             </div>
             </div>
                 </div>

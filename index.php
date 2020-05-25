@@ -42,7 +42,11 @@ $urls = [
     },
 
     "add-match" => function() {
-        MatchController::showAddForm();
+        if ($_SERVER["REQUEST_METHOD"] == "POST"){
+            MatchController::addMatch();
+        }else{
+            MatchController::showAddForm();
+        }
     },
 
     "players" => function() {
@@ -68,7 +72,11 @@ $urls = [
         if ($_SERVER["REQUEST_METHOD"] == "POST"){
             UserController::deleteUser();
         }
-    } 
+    },
+    
+    "api/searchUser" => function(){
+        UserController::searchApi();
+    }
 
 ];
 

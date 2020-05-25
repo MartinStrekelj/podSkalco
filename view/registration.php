@@ -16,7 +16,7 @@
             <div class="field" style="margin-top: 20px">
             <label class="label">Uporabniško ime</label>
             <div  class="control has-icons-left has-icons-right">
-                <input required name="USERNAME" class="input" type="text" placeholder="Vpiši svoje uporabniško ime!" value="<?= $user["USERNAME"] ?>">
+                <input required name="USERNAME" class="input" type="text" placeholder="Vpiši svoje uporabniško ime!" value="<?= $user["USERNAME"] ?>" autocomplete="off"> 
                 <span class="icon is-small is-left">
                 <i class="fas fa-user"></i>
                 </span>
@@ -46,11 +46,15 @@
                 <div class="field" style="margin-top: 20px">
                 <label class="label">Telefonska številka</label>
                 <div class="control has-icons-left has-icons-right">
-                <input name="GSM" class="input" type="text" placeholder="GSM. npr 041242992" value="<?= $user["GSM"] ?>">
+                <input name="GSM" class="input" type="tel" pattern="[0-9]{3} [0-9]{3} [0-9]{3}" placeholder="GSM. npr 041 242 992" value="<?= $user["GSM"] ?>">
                 <span class="icon is-small is-left">
                     <i class="fas fa-mobile-alt"></i>
                 </span>
                 </div>
+                <div>
+                    <p class="help is-info">Format pisanje telefonske številke: 123 345 678</p>
+                </div>
+
                 <div>
                     <p class="help is-danger"><?= $errors["GSM"]  ?></p>
                 </div>

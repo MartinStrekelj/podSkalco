@@ -17,21 +17,42 @@
             <div class="columns is-centered">
                 <div class="column is-10">
                     <p class="title is-4 is-spaced">Moj profil</p>
-                    <p class="subtitle is-5">Uporabniško ime: <span class="tag is-medium is-info"><?= $player["USERNAME"]?></span></p>
-                    <p class="subtitle is-5">Spol: <span class="tag is-medium is-info"><?= $player["SPOL"]?></span></p>
-                    <p class="subtitle is-5">Telefonska številka: <span class="tag is-medium is-info"><?= $player["GSM"]?></span></p>
-                    <p class="subtitle is-5">Član od: <span class="tag is-medium is-info"><?= $player["PRIDRUŽITEV"]?></span></p>
-                    <p class="subtitle is-5">Znanje: <span class="tag is-medium is-info"><?php 
-                    if ($player["PREDZNANJE"] == 1){
-                        echo "Začetnik";
-                    }
-                    elseif ($player["PREDZNANJE"] == 2){
-                        echo "Izkušen igralec";
-                    }
-                    else{
-                        echo "Veteran";
-                    }
-                    ?></span></p>
+                    <table class="table is-narrow">
+                    <tbody>
+                    <tr>
+                        <td><p class="subtitle is-5 has-text-justify">Uporabniško ime: </td>  
+                        <td><span class="tag is-medium is-info"><?= $player["USERNAME"]?></span></p></td>
+                    </tr>
+                    <tr>
+                        <td><p class="subtitle is-5 has-text-justify">Spol:</td>  
+                        <td><span class="tag is-medium is-info"><?= $player["SPOL"]?></span></p></td>
+                    </tr>
+                    <tr>
+                        <td><p class="subtitle is-5">Telefonska številka:</td> 
+                        <td><span class="tag is-medium is-info"><?= $player["GSM"]?></span></p></td>
+                    </tr>
+                    <tr>
+                        <td><p class="subtitle is-5">Član od: </td> 
+                        <td><span class="tag is-medium is-info"><?= $player["PRIDRUŽITEV"]?></span></p></td>
+                    </tr>
+                    <tr>
+                        <td><p class="subtitle is-5">Znanje:</td> 
+                        <td>  
+                        <span class="tag is-medium is-info"><?php 
+                        if ($player["PREDZNANJE"] == 1){
+                            echo "Začetnik";
+                        }
+                        elseif ($player["PREDZNANJE"] == 2){
+                            echo "Izkušen igralec";
+                        }
+                        else{
+                            echo "Veteran";
+                        }
+                        ?></span></p>
+                        </td>
+                    </tr>
+                    </tbody>
+                    </table>
                     <hr>
                     <a href="<?= BASE_URL . "edit-profile" ?>" class="button is-warning">Uredi profil</a>
                     <hr>
@@ -43,6 +64,7 @@
                         <br>
                         <button type="submit" style="margin-top: 20px" class="button is-danger">Izbriši profil</button>
                         </form>
+                        <hr>
                 </div>
         </div>
     </div>

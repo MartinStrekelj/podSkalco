@@ -188,5 +188,16 @@ class UserController {
             ViewHelper::redirect(BASE_URL . "");
         }
 
+        public static function searchApi() {
+            if (isset($_GET["query"]) && !empty($_GET["query"])) {
+                $hits = SkalcaDB::search($_GET["query"]);
+            } else {
+                $hits = SkalcaDB::getAllPlayers();
+            }
+    
+            header('Content-type: application/json; charset=utf-8');
+            echo json_encode($hits);
+        }
+
 
 }

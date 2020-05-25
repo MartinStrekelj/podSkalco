@@ -5,7 +5,13 @@ require_once("ViewHelper.php");
 class MatchController {
 
     public static function showAddForm(){
-        ViewHelper::render("view/add-match.php");
+        $fields = SkalcaDB::getAllFields();
+        $vars = ["fields" => $fields];
+        ViewHelper::render("view/add-match.php", $vars);
+    }
+
+    public static function addMatch(){
+        
     }
 
     public static function displayAllMatches() {

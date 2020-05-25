@@ -38,7 +38,7 @@ class SkalcaDB{
             VALUES (:username, :password, :gsm, :spol, :predznanje)");
 
         $PASSWORD = hash("crc32", $PASSWORD);
-
+        $GSM = str_replace(" ", "", $GSM);
         $statement -> bindParam(":username", $USERNAME);
         $statement -> bindParam(":password", $PASSWORD);
         $statement -> bindParam(":predznanje", $PREDZNANJE);
@@ -108,5 +108,17 @@ class SkalcaDB{
         $statement -> bindParam(":pid", $PID);
         $statement -> execute();
     }
+
+
+    public static function search($query) {
+        $db = DBInit::getInstance();
+
+        $statement = $db->prepare("SELECT PID, USERNAME, PREDZNANJE FROM Igralci 
+            WHERE USERNAME LIKE :query OR PREDZNANJE LIKE :query");
+        $statement->bindValue(":query", '%' . $query . '%');
+        $statement->execute();
+
+        return $statement->fetchAll();
+    }  
 
 }

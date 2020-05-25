@@ -16,25 +16,54 @@
         <div class="column">
             <div class="columns is-centered">
                 <div class="column is-10">
-                    <p class="title is-4 is-spaced"><?= $player["USERNAME"]?></p>
-                    <p class="subtitle is-5">Spol: <span class="tag is-medium is-info"><?= $player["SPOL"]?></span></p>
-                    <p class="subtitle is-5">Telefonska številka: <span class="tag is-medium is-info"><?= $player["GSM"]?></span></p>
-                    <p class="subtitle is-5">Član od: <span class="tag is-medium is-info"><?= $player["PRIDRUŽITEV"]?></span></p>
-                    <p class="subtitle is-5">Znanje: <span class="tag is-medium is-info"><?php 
-                    if ($player["PREDZNANJE"] == 1){
-                        echo "Začetnik";
-                    }
-                    elseif ($player["PREDZNANJE"] == 2){
-                        echo "Izkušen igralec";
-                    }
-                    else{
-                        echo "Veteran";
-                    }
-                    ?></span></p>
+                    <div class="level">
+                        <div class="level-left">
+                            <div class="level-item">
+                        <figure class="image is-64x64">
+                            <img class ="is-rounded" src="<?= "https://api.adorable.io/avatars/64/" . $player["PID"] . "png" ?>  " alt="avatar">
+                        </figure>
+                        </div>
+                        <div class="level-item">
+                            <p class="title is-4 has-text-right"> <?= $player["USERNAME"]?></p>
+                        </div>
+                        </div>
+                    </div>
+                    <table class="table is-narrow"> 
+                    <tbody>
+                    <tr>
+                        <td><p class="subtitle is-5 has-text-justify">Spol:</td>  
+                        <td><span class="tag is-medium is-info"><?= $player["SPOL"]?></span></p></td>
+                    </tr>
+                    <tr>
+                        <td><p class="subtitle is-5">Telefonska številka:</td> 
+                        <td><span class="tag is-medium is-info"><?= $player["GSM"]?></span></p></td>
+                    </tr>
+                    <tr>
+                        <td><p class="subtitle is-5">Član od: </td> 
+                        <td><span class="tag is-medium is-info"><?= $player["PRIDRUŽITEV"]?></span></p></td>
+                    </tr>
+                    <tr>
+                        <td><p class="subtitle is-5">Znanje:</td> 
+                        <td>  
+                        <span class="tag is-medium is-info"><?php 
+                        if ($player["PREDZNANJE"] == 1){
+                            echo "Začetnik";
+                        }
+                        elseif ($player["PREDZNANJE"] == 2){
+                            echo "Izkušen igralec";
+                        }
+                        else{
+                            echo "Veteran";
+                        }
+                        ?></span></p>
+                        </td>
+                    </tr>
+                    </tbody>
+                    </table>
                 </div>
         </div>
-    </div>
-
+    </div></table>
+    </table>
 <script> 
     const selected = document.getElementById("all_players")
     if (selected != undefined){

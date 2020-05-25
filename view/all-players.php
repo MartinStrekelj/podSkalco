@@ -22,7 +22,14 @@
                     <?= $updateMessage ?>
                 </div>
             <?php endif; ?>
-                <table class="table is-fullwidth">
+            <div class="control has-icons-left">
+                <input class="input is-medium" type="text" placeholder="Išči igralca" id="search-field">
+                <span class="icon is-small is-left">
+                    <i class="fas fa-search"></i>
+                </span>
+            </div>
+            <hr>
+                <table class="table is-fullwidth" id = "user-table">
                     <thead>
                         <tr>
                         <th>Igralec</th>
@@ -30,7 +37,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($players as $player): ?>
+                    <?php foreach ($players as $player): ?>
                             <tr>
                                 <td><a href="<?= BASE_URL . "players?id=" . $player["PID"] ?>"><?= $player["USERNAME"]?></a></td>
                                 <td><?php if ($player["PREDZNANJE"] == 1){
@@ -50,22 +57,32 @@
         </div>
     </div>
 
-<script> 
-    const selected = document.getElementById("all_players")
-    if (selected != undefined){
-        selected.classList.add("is-active");
-    }
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script> 
+        const selected = document.getElementById("all_players")
+        if (selected != undefined){
+            selected.classList.add("is-active");
+        }
 
-    document.addEventListener('DOMContentLoaded', () => {
-        (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
-            $notification = $delete.parentNode;
+        document.addEventListener('DOMContentLoaded', () => {
+            (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
+                $notification = $delete.parentNode;
 
-            $delete.addEventListener('click', () => {
-            $notification.parentNode.removeChild($notification);
+                $delete.addEventListener('click', () => {
+                $notification.parentNode.removeChild($notification);
+                });
             });
-        });
-        });
+            });
 
-</script>
+            $(document).ready(function(){
+                $("#search-field").on("keyup", function() {
+                    var value = $(this).val().toLowerCase();
+                    $("#user-table tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                    });
+                });
+                });
+        
+    </script>
 </body>
 </html>
