@@ -2,10 +2,10 @@
 -- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: May 20, 2020 at 04:53 PM
+-- Host: 127.0.0.1
+-- Generation Time: May 25, 2020 at 04:07 PM
 -- Server version: 10.4.11-MariaDB
--- PHP Version: 7.4.5
+-- PHP Version: 7.4.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,16 +18,16 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `PodSkalco`
+-- Database: `podskalco`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Igralci`
+-- Table structure for table `igralci`
 --
 
-CREATE TABLE `Igralci` (
+CREATE TABLE `igralci` (
   `PID` int(11) NOT NULL,
   `USERNAME` varchar(30) NOT NULL,
   `PASSWORD` varchar(30) NOT NULL,
@@ -38,13 +38,13 @@ CREATE TABLE `Igralci` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `Igralci`
+-- Dumping data for table `igralci`
 --
 
-INSERT INTO `Igralci` (`PID`, `USERNAME`, `PASSWORD`, `GSM`, `SPOL`, `PREDZNANJE`, `PRIDRUŽITEV`) VALUES
-(1, 'Admin', 'password1', '41330612', 'M', 1, '0000-00-00 00:00:00'),
-(2, 'Martin', 'foo', '0', 'M', 2, '0000-00-00 00:00:00'),
-(3, 'Megi', 'ca985bfc', '0', 'Ž', 1, '0000-00-00 00:00:00'),
+INSERT INTO `igralci` (`PID`, `USERNAME`, `PASSWORD`, `GSM`, `SPOL`, `PREDZNANJE`, `PRIDRUŽITEV`) VALUES
+(1, 'Admin', 'eed7de5c', '41330612', 'M', 1, '0000-00-00 00:00:00'),
+(2, 'Martin', 'eed7de5c', '41330612', 'M', 2, '0000-00-00 00:00:00'),
+(3, 'Megi', 'ca985bfc', '041330612', 'Ž', 1, '0000-00-00 00:00:00'),
 (5, 'SuperBadminton', 'accf8b33', '04133012', 'M', 1, '2020-05-19 18:10:06'),
 (8, 'User1', '7e9a4030', '555413222', 'Ž', 1, '2020-05-20 14:30:01'),
 (9, 'User15', '219a402c', '421442112', 'M', 3, '2020-05-20 14:54:05'),
@@ -53,20 +53,20 @@ INSERT INTO `Igralci` (`PID`, `USERNAME`, `PASSWORD`, `GSM`, `SPOL`, `PREDZNANJE
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Igrisca`
+-- Table structure for table `igrisca`
 --
 
-CREATE TABLE `Igrisca` (
+CREATE TABLE `igrisca` (
   `FID` int(11) NOT NULL,
   `NAZIV` varchar(30) NOT NULL,
   `OPIS` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `Igrisca`
+-- Dumping data for table `igrisca`
 --
 
-INSERT INTO `Igrisca` (`FID`, `NAZIV`, `OPIS`) VALUES
+INSERT INTO `igrisca` (`FID`, `NAZIV`, `OPIS`) VALUES
 (1, 'Žogica', 'Igrišče Žogica je pravokotno in označeno s črtami debeline 40 mm, na sredini pa ga ločuje mreža, ki je visoka 152 cm v sredini igrišča in 155 cm nad stranskimi črtami za igro dvojic. Pri igri posameznikov igrišče omejujeta notranji stranski črti in zadnja mejna črta, pri dvojicah pa zunanji stranski črti in zadnja mejna črta. Pri servisu je zadnja servisna črta pri dvojicah bližje prednji servisni črti, kot pri igri posameznikov.'),
 (2, 'Loparček', 'Igrišče Loparček je pravokotno in označeno s črtami debeline 40 mm, na sredini pa ga ločuje mreža, ki je visoka 152 cm v sredini igrišča in 155 cm nad stranskimi črtami za igro dvojic. Pri igri posameznikov igrišče omejujeta notranji stranski črti in zadnja mejna črta, pri dvojicah pa zunanji stranski črti in zadnja mejna črta. Pri servisu je zadnja servisna črta pri dvojicah bližje prednji servisni črti, kot pri igri posameznikov.'),
 (3, 'Arehek', 'Igrišče Arehek je pravokotno in označeno s črtami debeline 40 mm, na sredini pa ga ločuje mreža, ki je visoka 152 cm v sredini igrišča in 155 cm nad stranskimi črtami za igro dvojic. Pri igri posameznikov igrišče omejujeta notranji stranski črti in zadnja mejna črta, pri dvojicah pa zunanji stranski črti in zadnja mejna črta. Pri servisu je zadnja servisna črta pri dvojicah bližje prednji servisni črti, kot pri igri posameznikov.');
@@ -74,16 +74,18 @@ INSERT INTO `Igrisca` (`FID`, `NAZIV`, `OPIS`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Tekme`
+-- Table structure for table `tekme`
 --
 
-CREATE TABLE `Tekme` (
+CREATE TABLE `tekme` (
   `MID` int(11) NOT NULL,
+  `NAZIV` varchar(30) NOT NULL,
   `FID` int(11) NOT NULL,
   `ORGANIZATOR` int(11) NOT NULL,
   `URA` int(11) NOT NULL,
   `DATUM` varchar(10) NOT NULL,
-  `OPISTEKME` text NOT NULL
+  `OPISTEKME` text NOT NULL,
+  `LIKES` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -91,22 +93,22 @@ CREATE TABLE `Tekme` (
 --
 
 --
--- Indexes for table `Igralci`
+-- Indexes for table `igralci`
 --
-ALTER TABLE `Igralci`
+ALTER TABLE `igralci`
   ADD PRIMARY KEY (`PID`),
   ADD UNIQUE KEY `USERNAME` (`USERNAME`);
 
 --
--- Indexes for table `Igrisca`
+-- Indexes for table `igrisca`
 --
-ALTER TABLE `Igrisca`
+ALTER TABLE `igrisca`
   ADD PRIMARY KEY (`FID`);
 
 --
--- Indexes for table `Tekme`
+-- Indexes for table `tekme`
 --
-ALTER TABLE `Tekme`
+ALTER TABLE `tekme`
   ADD PRIMARY KEY (`MID`),
   ADD KEY `Organizator` (`ORGANIZATOR`),
   ADD KEY `FID` (`FID`);
@@ -116,21 +118,21 @@ ALTER TABLE `Tekme`
 --
 
 --
--- AUTO_INCREMENT for table `Igralci`
+-- AUTO_INCREMENT for table `igralci`
 --
-ALTER TABLE `Igralci`
+ALTER TABLE `igralci`
   MODIFY `PID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT for table `Igrisca`
+-- AUTO_INCREMENT for table `igrisca`
 --
-ALTER TABLE `Igrisca`
+ALTER TABLE `igrisca`
   MODIFY `FID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `Tekme`
+-- AUTO_INCREMENT for table `tekme`
 --
-ALTER TABLE `Tekme`
+ALTER TABLE `tekme`
   MODIFY `MID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -138,11 +140,11 @@ ALTER TABLE `Tekme`
 --
 
 --
--- Constraints for table `Tekme`
+-- Constraints for table `tekme`
 --
-ALTER TABLE `Tekme`
-  ADD CONSTRAINT `FID` FOREIGN KEY (`FID`) REFERENCES `Igrisca` (`FID`),
-  ADD CONSTRAINT `Organizator` FOREIGN KEY (`ORGANIZATOR`) REFERENCES `Igralci` (`PID`);
+ALTER TABLE `tekme`
+  ADD CONSTRAINT `FID` FOREIGN KEY (`FID`) REFERENCES `igrisca` (`FID`),
+  ADD CONSTRAINT `Organizator` FOREIGN KEY (`ORGANIZATOR`) REFERENCES `igralci` (`PID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

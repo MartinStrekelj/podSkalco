@@ -6,7 +6,7 @@ class SkalcaDB{
     public static function getAllPlayers() {
         $db = DBInit::getInstance();
 
-        $statement = $db->prepare("SELECT * FROM Igralci");
+        $statement = $db->prepare("SELECT * FROM igralci");
         $statement->execute();
 
         return $statement->fetchAll();
@@ -15,7 +15,7 @@ class SkalcaDB{
     public static function getAllFields() {
         $db = DBInit::getInstance();
 
-        $statement = $db->prepare("SELECT NAZIV, OPIS FROM Igrisca");
+        $statement = $db->prepare("SELECT * FROM igrisca");
         $statement->execute();
 
         return $statement->fetchAll();
@@ -24,7 +24,7 @@ class SkalcaDB{
     public static function getAllMatches() {
         $db = DBInit::getInstance();
 
-        $statement = $db->prepare("SELECT * FROM Tekme");
+        $statement = $db->prepare("SELECT * FROM tekme");
         $statement->execute();
 
         return $statement->fetchAll();
@@ -34,7 +34,7 @@ class SkalcaDB{
         $db = DBInit::getInstance();
         
         
-        $statement = $db->prepare("INSERT INTO Igralci (USERNAME, PASSWORD, GSM, SPOL, PREDZNANJE)
+        $statement = $db->prepare("INSERT INTO igralci (USERNAME, PASSWORD, GSM, SPOL, PREDZNANJE)
             VALUES (:username, :password, :gsm, :spol, :predznanje)");
 
         $PASSWORD = hash("crc32", $PASSWORD);
@@ -49,7 +49,7 @@ class SkalcaDB{
 
     public static function findUserByName($USERNAME){
         $db = DBinit::getInstance();
-        $statement = $db -> prepare("SELECT PID, USERNAME FROM Igralci WHERE USERNAME = :username");
+        $statement = $db -> prepare("SELECT PID, USERNAME FROM igralci WHERE USERNAME = :username");
         $statement -> bindParam(":username", $USERNAME);
         $statement -> execute();
 
@@ -58,7 +58,7 @@ class SkalcaDB{
 
     public static function getPlayer($PID){
         $db = DBinit::getInstance();
-        $statement = $db -> prepare("SELECT * FROM Igralci WHERE PID = :pid");
+        $statement = $db -> prepare("SELECT * FROM igralci WHERE PID = :pid");
         $statement -> bindParam(":pid", $PID, PDO::PARAM_INT);
         $statement -> execute();
 
@@ -76,7 +76,7 @@ class SkalcaDB{
 
     $PASSWORD = hash("crc32", $PASSWORD);
 
-    $statement = $db -> prepare("SELECT COUNT(PID) FROM Igralci WHERE USERNAME = :username AND PASSWORD = :password");
+    $statement = $db -> prepare("SELECT COUNT(PID) FROM igralci WHERE USERNAME = :username AND PASSWORD = :password");
     $statement -> bindParam(":username", $USERNAME);
     $statement -> bindParam(":password", $PASSWORD);
 
@@ -89,7 +89,7 @@ class SkalcaDB{
         $db = DBInit::getInstance();
         
         
-        $statement = $db->prepare("UPDATE Igralci SET USERNAME = :username, PASSWORD = :password, GSM = :gsm, SPOL = :spol
+        $statement = $db->prepare("UPDATE igralci SET USERNAME = :username, PASSWORD = :password, GSM = :gsm, SPOL = :spol
             WHERE PID = :pid");
 
         $PASSWORD = hash("crc32", $PASSWORD);
@@ -103,7 +103,7 @@ class SkalcaDB{
 
     public static function deleteUser($PID){
         $db = DBInit::getInstance();
-        $statement = $db->prepare("DELETE FROM Igralci
+        $statement = $db->prepare("DELETE FROM igralci
             WHERE PID = :pid");
         $statement -> bindParam(":pid", $PID);
         $statement -> execute();
@@ -113,12 +113,52 @@ class SkalcaDB{
     public static function search($query) {
         $db = DBInit::getInstance();
 
-        $statement = $db->prepare("SELECT PID, USERNAME, PREDZNANJE FROM Igralci 
+        $statement = $db->prepare("SELECT PID, USERNAME, PREDZNANJE FROM igralci 
             WHERE USERNAME LIKE :query OR PREDZNANJE LIKE :query");
         $statement->bindValue(":query", '%' . $query . '%');
         $statement->execute();
 
         return $statement->fetchAll();
     }  
+
+
+    public static function matchTimeslotTaken($DATUM, $URA, $FID){
+        $db = DBInit::getInstance();
+        $statement = $db -> prepare("SELECT COUNT(MID) FROM tekme WHERE
+                                    DATUM = :datum AND URA = :ura AND FID = :fid;");
+        $statement -> bindParam(":datum", $DATUM);
+        $statement -> bindParam(":ura", $URA);
+        $statement -> bindParam(":fid", $FID);
+        $statement -> execute();
+        
+        return $statement -> fetchColumn(0) == 0;
+    }
+
+    public static function addMatch($NAZIV, $FID, $ORGANIZATOR, $URA, $DATUM, $OPISTEKME, $LIKES){
+        $db = DBInit::getInstance();
+        
+        
+        $statement = $db->prepare("INSERT INTO tekme (NAZIV, FID, ORGANIZATOR, URA, DATUM, OPISTEKME, LIKES)
+            VALUES (:naziv, :fid, :org, :ura, :datum, :opis, :likes);");
+
+        $statement -> bindParam(":naziv", $NAZIV);
+        $statement -> bindParam(":fid", $FID);
+        $statement -> bindParam(":org", $ORGANIZATOR);
+        $statement -> bindParam(":ura", $URA);
+        $statement -> bindParam(":datum", $DATUM);
+        $statement -> bindParam(":opis", $OPISTEKME);
+        $statement -> bindParam(":likes", $LIKES);
+        $statement -> execute();
+    }
+
+    public static function getMatchByPID ($PID){
+        $db = DBInit::getInstance();
+
+        $statement = $db ->prepare("SELECT * FROM tekme WHERE ORGANIZATOR = :pid");
+        $statement -> bindParam(":pid", $PID);
+        $statement -> execute();
+
+        return $statement -> fetchAll();
+    }
 
 }

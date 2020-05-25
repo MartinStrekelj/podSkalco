@@ -15,7 +15,8 @@
         </div>
         <div class="column">
             <div id="#match_dashboard" class="columns">
-                <?php include_once("empty-dashboard.php") ?>
+                <!-- <?php include_once("empty-dashboard.php") ?> -->
+                
             </div>
         </div>
     </div>

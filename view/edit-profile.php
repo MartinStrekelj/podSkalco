@@ -31,7 +31,7 @@
             <div class="field" style="margin-top: 20px">
             <label class="label">Geslo</label>
             <div class="control has-icons-left has-icons-right">
-                <input id = "password" required name="PASSWORD" class="input" type="password" placeholder="Izberi si geslo" value="<?= $user["PASSWORD"] ?>" onkeyup="check()">
+                <input id = "password" required name="PASSWORD" class="input" type="password" placeholder="Izberi si geslo" value="" onkeyup="check()">
                 <span class="icon is-small is-left">
                 <i class="fas fa-unlock-alt"></i>
                 </span>

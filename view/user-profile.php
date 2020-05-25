@@ -16,7 +16,18 @@
         <div class="column">
             <div class="columns is-centered">
                 <div class="column is-10">
-                    <p class="title is-4 is-spaced">Moj profil</p>
+                <div class="level">
+                        <div class="level-left">
+                            <div class="level-item">
+                        <figure class="image is-64x64">
+                            <img class ="is-rounded" src="<?= "https://api.adorable.io/avatars/64/" . $_SESSION["user_id"] . "png" ?>  " alt="avatar">
+                        </figure>
+                        </div>
+                        <div class="level-item">
+                            <p class="title is-4 has-text-right"> Moj profil</p>
+                        </div>
+                        </div>
+                    </div>
                     <table class="table is-narrow">
                     <tbody>
                     <tr>

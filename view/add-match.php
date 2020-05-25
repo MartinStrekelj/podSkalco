@@ -16,18 +16,24 @@
         <div class="column">
             <div class="columns is-centered">
                 <div class="column is-8">
+                <?php if (!empty($timeslotError)): ?>
+                <div class="notification is-warning">
+                    <button class="delete"></button>
+                    <?= $timeslotError ?>
+                </div>
+            <?php endif; ?>
                 <form action="<?= BASE_URL . "add-match" ?>" method="post">
                 <div class="field" style="margin-top: 20px">
             <label class="label">Naziv tekme</label>
             <div class="control has-icons-left has-icons-right">
-                <input id="match_title" class="input" type="text" placeholder="npr. Petkova liga" required>
+                <input name = "NAZIV" id="match_title" class="input" type="text" placeholder="npr. Petkova liga" required>
                 <span class="icon is-small is-left">
                 <i class="fas fa-heading"></i>
                 </span>
                 <div class="field" style="margin-top: 20px">
                     <label class="label">Čas tekme</label>
                     <div class="select">
-                    <select required>
+                    <select name = "URA" required>
                         <option value="8">8.05 - 9.00</option>
                         <option value="9">9.05 - 10.00</option>
                         <option value="10">10.05 - 11.00</option>
@@ -49,7 +55,7 @@
                     <div class="field" style="margin-top: 20px">
                         <label class="label">Datum tekmovanja</label>
                             <div class="control has-icons-left has-icons-right">
-                                <input id="match_date" class="input" min="6/3/2020" type="date" required>
+                                <input name="DATUM" id="match_date" class="input" min="6/3/2020" type="date" required>
                         <span class="icon is-small is-left">
                         <i class="fas fa-calendar-check"></i>
                         </span>
@@ -59,13 +65,13 @@
                     </div>
             <div class="field" style="margin-top: 20px">
                 <label class="label">Opis tekme</label>
-                <textarea id="description" class="textarea is-info" placeholder="Povej ostalim igralcem na kaj se prijavljajo" rows="5"></textarea>
+                <textarea name="OPISTEKME" id="description" class="textarea is-info" placeholder="Povej ostalim igralcem na kaj se prijavljajo" rows="5"></textarea>
             </div>
             <div class="field" style="margin-top: 20px">
                 <label class="label">Igrišče</label>
                 <div class="control">
                     <div class="select">
-                    <select>
+                    <select name="FID" required>
                         <?php foreach ($fields as $field): ?>
                             <option value="<?= $field["FID"] ?>"> <?= $field["NAZIV"] ?></option>
                         <?php endforeach; ?>

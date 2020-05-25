@@ -53,7 +53,7 @@ $urls = [
         RouteController::showPlayers();
     },
     "display_match" => function(){
-        MatchController::displayAllMatches();
+        MatchController::displayUserMatches();
     },
 
     "logout" => function(){
