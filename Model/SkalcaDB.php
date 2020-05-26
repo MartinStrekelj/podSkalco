@@ -214,4 +214,30 @@ class SkalcaDB{
         $statement -> execute();
     }
 
+    public static function getMatchByMID ($MID){
+        $db = DBInit::getInstance();
+
+        $statement = $db ->prepare("SELECT * FROM tekme WHERE MID = :mid");
+        $statement -> bindParam(":mid", $MID);
+        $statement -> execute();
+
+        return $statement -> fetch();
+    }
+
+    public static function editMatch($MID, $NAZIV, $URA, $DATUM, $OPISTEKME){
+    $db = DBInit::getInstance();
+    
+    $statement = $db->prepare("UPDATE tekme SET NAZIV = :naziv, FID = :fid, URA = :ura, DATUM = :datum, OPISTEKME = :opis
+        WHERE MID = :mid");
+
+    $statement -> bindParam(":mid", $MID);
+    $statement -> bindParam(":fid", $FID);
+    $statement -> bindParam(":naziv", $NAZIV);
+    $statement -> bindParam(":ura", $URA);
+    $statement -> bindParam(":datum", $DATUM);
+    $statement -> bindParam(":opis", $OPISTEKME);
+
+    $statement -> execute();
+    }
+
 }

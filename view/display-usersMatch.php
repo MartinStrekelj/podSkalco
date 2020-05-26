@@ -21,19 +21,31 @@
                         <tr>
                             <th>Naziv tekmovanja</th>
                             <th>Čas in datum tekmovanja</th>
-                            <th>Številka igrišča</th>
+                            <th>Igrišče</th>
                             <th>Uredi tekmo</th>
                             <th>Izbriši tekmo</th>
                         </tr>
                     </thead>
                     <tbody>
+                        <?php foreach($matches as $match): ?>
                         <tr>
-                            <td>foo</td>
-                            <td>smth</td>
-                            <td>bar</td>
-                            <td><a href="" class="button is-warning">Uredi</a></td>
-                            <td><a href="" class="button is-danger">Izbriši</a></td>
+                            <td><?= $match["NAZIV"] ?></td>
+                            <td><?= $match["URA"] ?>.05 | <?php 
+                                $originalDate = $match["DATUM"];
+                                $newDate = date("d-m-Y", strtotime($originalDate)); 
+                                echo $newDate?></td>
+                            <td><?php 
+                                foreach($fields as $field){
+                                    if($field["FID"] == $match["FID"]){
+                                        echo $field["NAZIV"];
+                                        break;
+                                    }
+                                    }?>
+                                    </td>
+                            <td><a href="<?= BASE_URL . "edit-match?MID=" . $match["MID"] ?>" class="button is-warning">Uredi</a></td>
+                            <td><a href="<?= BASE_URL . "delete-match?MID=" . $match["MID"] ?>" class="button is-danger">Izbriši</a></td>
                         </tr>
+                        <?php endforeach; ?>
                     </tbody>
                 </div>
         </div>

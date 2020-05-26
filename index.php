@@ -84,6 +84,18 @@ $urls = [
 
     "api/removeUpvote" => function (){
         MatchController::removeUpvote();
+    },
+
+    "edit-match" => function(){
+        if ($_SERVER["REQUEST_METHOD"] == "POST"){
+            MatchController::editMatch();
+        }else{
+            MatchController::showEditMatchForm();
+        }
+    },
+    
+    "delete-match" => function(){
+        MatchController::deleteMatch();
     }
 
 ];
