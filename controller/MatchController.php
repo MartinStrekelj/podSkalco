@@ -105,10 +105,14 @@ class MatchController {
         echo json_encode($likes);
     }
 
-    public static function showEditMatchForm($data=[], $errors=[]){
+    public static function showEditMatchForm($data=[], $errors=[], $MID = 0){
         // ViewHelper::render("view/match-detail")
         $fields = SkalcaDB::getAllFields();
-        $data = SkalcaDB::getMatchByMID($_GET["MID"]);
+        if (isset($_GET)){
+            $data = SkalcaDB::getMatchByMID($_GET["MID"]);
+        } else{
+            $data = SkalcaDB::getMatchByMID($MID);
+        }
 
         if (empty($errors)) {
             foreach ($data as $key => $value) {
@@ -147,15 +151,15 @@ class MatchController {
             foreach ($errors as $error) {
                 $isDataValid = $isDataValid && empty($error);
             }
-            
+
             if ($isDataValid){
                 if ($validTimeslot){
-                    SkalcaDB::editMatch($data["MID"], $data["NAZIV"], $data["FID"], $_SESSION["user_id"], $data["URA"], $data["DATUM"], $data["OPISTEKME"]);
+                    SkalcaDB::editMatch($data["MID"], $data["NAZIV"], $data["FID"], $data["URA"], $data["DATUM"], $data["OPISTEKME"]);
                     ViewHelper::redirect(BASE_URL . "");
                 }else {
                     $fields = SkalcaDB::getAllFields();
                     $vars = ["timeslotError" => "Izbrani termin za dogodek je že izbran. Poskusite izbrati drugo igrišče ali termin.", "data" => $data, "errors" => $errors, "fields" => $fields];
-                    Viewhelper::render("view/-match.php", $vars);
+                    self::showEditMatchForm($data, $errors, $data["MID"]);
                 }
             }else{
                 self::showAddForm($data, $errors);

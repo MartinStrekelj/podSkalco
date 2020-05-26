@@ -224,7 +224,7 @@ class SkalcaDB{
         return $statement -> fetch();
     }
 
-    public static function editMatch($MID, $NAZIV, $URA, $DATUM, $OPISTEKME){
+    public static function editMatch($MID, $NAZIV, $FID, $URA, $DATUM, $OPISTEKME){
     $db = DBInit::getInstance();
     
     $statement = $db->prepare("UPDATE tekme SET NAZIV = :naziv, FID = :fid, URA = :ura, DATUM = :datum, OPISTEKME = :opis
