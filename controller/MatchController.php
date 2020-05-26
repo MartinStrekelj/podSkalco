@@ -72,4 +72,24 @@ class MatchController {
     public static function displayUserMatches() {
         ViewHelper::render("view/display-usersMatch.php");
     }
+
+    public static function userLiked($MID, $PID, $likes){
+        foreach ($likes as $like) {
+            if ($like["MID"] == $MID && $like["PID"] == $PID){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static function addUpvote(){
+        SkalcaDB::addUpvote($_POST["MID"], $_POST["PID"]);
+        SkalcaDB::updateTotalLikesCount($_POST["MID"], true);
+    }
+
+    public static function removeUpvote(){
+        SkalcaDB::addUpvote($_POST["MID"], $_POST["PID"]);
+        SkalcaDB::updateTotalLikesCount($_POST["MID"], false);
+    }
+
 }

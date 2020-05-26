@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 25, 2020 at 04:07 PM
+-- Generation Time: May 26, 2020 at 04:33 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.6
 
@@ -74,6 +74,18 @@ INSERT INTO `igrisca` (`FID`, `NAZIV`, `OPIS`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `likes`
+--
+
+CREATE TABLE `likes` (
+  `LID` int(11) NOT NULL,
+  `PID` int(11) NOT NULL,
+  `MID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tekme`
 --
 
@@ -87,6 +99,17 @@ CREATE TABLE `tekme` (
   `OPISTEKME` text NOT NULL,
   `LIKES` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tekme`
+--
+
+INSERT INTO `tekme` (`MID`, `NAZIV`, `FID`, `ORGANIZATOR`, `URA`, `DATUM`, `OPISTEKME`, `LIKES`) VALUES
+(1, 'Aloalo', 2, 10, 8, '2020-05-28', 'Halooo', 0),
+(2, 'Petkova liga', 2, 1, 18, '2020-05-29', 'Petek je in mi se imamo radi.', 0),
+(3, 'Tekma', 3, 1, 8, '2020-05-31', 'Povej ostalim', 0),
+(4, 'Liga', 1, 1, 16, '2020-06-18', '&#34;Even though I played national level badminton, I told my parents when I was in 10th that I was not interested in continuing. Being a model or actor fascinated me from a young age, and I even did a couple of ads when I was just eight years old.&#34; - Deepika Padukone', 0),
+(5, 'Se ena tekma', 1, 1, 15, '2020-05-17', 'Pridi ', 0);
 
 --
 -- Indexes for dumped tables
@@ -104,6 +127,14 @@ ALTER TABLE `igralci`
 --
 ALTER TABLE `igrisca`
   ADD PRIMARY KEY (`FID`);
+
+--
+-- Indexes for table `likes`
+--
+ALTER TABLE `likes`
+  ADD PRIMARY KEY (`LID`),
+  ADD KEY `PID` (`PID`),
+  ADD KEY `MID` (`MID`);
 
 --
 -- Indexes for table `tekme`
@@ -130,14 +161,27 @@ ALTER TABLE `igrisca`
   MODIFY `FID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `likes`
+--
+ALTER TABLE `likes`
+  MODIFY `LID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `tekme`
 --
 ALTER TABLE `tekme`
-  MODIFY `MID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `MID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `likes`
+--
+ALTER TABLE `likes`
+  ADD CONSTRAINT `likes_ibfk_1` FOREIGN KEY (`PID`) REFERENCES `igralci` (`PID`),
+  ADD CONSTRAINT `likes_ibfk_2` FOREIGN KEY (`MID`) REFERENCES `tekme` (`MID`);
 
 --
 -- Constraints for table `tekme`

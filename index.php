@@ -76,7 +76,16 @@ $urls = [
     
     "api/searchUser" => function(){
         UserController::searchApi();
+    },
+
+    "api/addUpvote" => function(){
+        MatchController::addUpvote();
+    },
+
+    "api/removeUpvote" => function (){
+        MatchController::removeUpvote();
     }
+
 
 ];
 

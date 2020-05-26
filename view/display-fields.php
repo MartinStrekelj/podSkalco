@@ -14,7 +14,7 @@
         <?php include_once("sidemenu.php") ?>
         </div>
         <div class="column">
-            <div class="columns is-centered">
+            <div class="columns">
                 <div class="column is-10">
                 <?php foreach ($fields as $field): ?>
                 <div class="box">

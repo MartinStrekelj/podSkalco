@@ -7,7 +7,14 @@ require_once("Model/SkalcaDB.php");
 class RouteController {
 
     public static function index(){
-        ViewHelper::render("view/dashboard.php");
+        $matches = SkalcaDB::getAllMatches();
+        $players = SkalcaDB::getAllPlayers();
+        $fields  = SkalcaDB::getAllFields();
+        $likes   = SkalcaDB::getAllLikes();
+
+        $vars = ["matches" => $matches, "players" => $players, "fields" => $fields, "likes" => $likes];
+
+        ViewHelper::render("view/dashboard.php", $vars);
     }
     public static function showPlayers(){
         if (isset($_GET["id"])){
@@ -22,6 +29,8 @@ class RouteController {
             ViewHelper::render("view/all-players.php", $vars);
         }
     }
+
+
 
     public static function showFields(){
         $vars = [ "fields" => SkalcaDB::getAllFields()];

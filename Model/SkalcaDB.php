@@ -161,4 +161,52 @@ class SkalcaDB{
         return $statement -> fetchAll();
     }
 
+    public static function getLikes($MID){
+        $db = DBinit::getInstance();
+
+        $statement = $db -> prepare("SELECT LIKES FROM tekme WHERE MID = :mid");
+        $statement -> bindParam(":mid", $MID);
+        $statement -> execute();
+
+        return $statement -> fetch();
+    }
+
+    public static function upLikes($MID){
+        // TODO
+        $db = DBinit::getInstance();
+    }
+
+    public static function getAllLikes(){
+        $db = DBinit::getInstance();
+
+        $statement = $db -> prepare("SELECT * FROM likes;");
+        $statement -> execute();
+
+        return $statement -> fetchAll();
+    }
+
+    public static function addUpvote($MID, $PID){
+        $db = DBinit::getInstance();
+        $statement = $db -> prepare("INSERT INTO likes (MID, PID) VALUES (:mid, :pid);");
+        $statement -> bindParam(":mid", $MID);
+        $statement -> bindParam(":pid", $PID);
+
+        $statement -> execute();
+    }
+
+    public static function updateTotalLikesCount($MID, $type){
+        $db = DBinit::getInstance();
+
+        $statement = $db->prepare("UPDATE likes SET LIKES = :likes
+        WHERE PID = :pid");
+        $currentLikes = self::getLikes($MID) -> LIKES;
+        if ($type == true){
+            $statement -> bindParam(":likes", $currentLikes + 1);
+        } else {
+            $statement -> bindParam(":likes", $currentLikes - 1);
+        }
+
+        $statement -> execute();
+    }
+
 }
