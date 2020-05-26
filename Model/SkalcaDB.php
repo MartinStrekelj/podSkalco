@@ -194,16 +194,26 @@ class SkalcaDB{
         $statement -> execute();
     }
 
+    public static function removeUpvote($MID, $PID){
+        $db = DBinit::getInstance();
+        $statement = $db -> prepare("DELETE FROM likes WHERE MID = :mid AND PID = :pid;");
+        $statement -> bindParam(":mid", $MID);
+        $statement -> bindParam(":pid", $PID);
+
+        $statement -> execute();
+    }
+
     public static function updateTotalLikesCount($MID, $type){
         $db = DBinit::getInstance();
 
-        $statement = $db->prepare("UPDATE likes SET LIKES = :likes
-        WHERE PID = :pid");
-        $currentLikes = self::getLikes($MID) -> LIKES;
+        $statement = $db->prepare("UPDATE tekme SET LIKES = :likes
+        WHERE MID = :mid");
+        $statement -> bindParam(":mid", $MID);
+        $currentLikes = self::getLikes($MID)["LIKES"];
         if ($type == true){
-            $statement -> bindParam(":likes", $currentLikes + 1);
-        } else {
-            $statement -> bindParam(":likes", $currentLikes - 1);
+            $statement -> bindValue(":likes", $currentLikes + 1);
+        } elseif ($type == false) {
+            $statement -> bindValue(":likes", $currentLikes - 1);
         }
 
         $statement -> execute();

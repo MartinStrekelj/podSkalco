@@ -86,7 +86,6 @@ $urls = [
         MatchController::removeUpvote();
     }
 
-
 ];
 
 try {

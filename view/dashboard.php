@@ -16,14 +16,8 @@
         <?php include_once("sidemenu.php") ?>
         </div>
         <div class="column">
-        <div class="control has-icons-left">
-                    <input class="input is-medium" type="text" placeholder="Poišči tekmovanje" id="search-field">
-                    <span class="icon is-small is-left">
-                        <i class="fas fa-search"></i>
-                    </span>
-        </div>
             <div id="match_dashboard" class="columns" style="margin-top: 10px;">
-            <div class="column is-11">
+            <div class="column is-12">
                 <div class="columns is-multiline is-centered is-variable is-1">
                 <?php if (!empty($matches)): ?>
                 <?php foreach($matches as $match): ?>
@@ -75,7 +69,7 @@
                                     else:
                                 ?>
                                 <!-- if user liked the event -->
-                                    <a class="level-item downvote button is-danger" aria-label="like">
+                                    <a class="like-btn level-item downvote button is-danger" aria-label="like" id="<?= $match["MID"]?>">
                                         <span class="icon is-small">
                                         <i class="fas fa-heart" aria-hidden="true"></i>
                                         </span>
@@ -118,7 +112,7 @@
     });
 
     $(".like-btn").on("click", function(){
-        let match_id = $(this).data("id");
+        let match_id = $(this).attr("id");
         $clicked_btn = $(this);
         if ($clicked_btn.hasClass("upvote")){
             action = "like";
@@ -136,7 +130,11 @@
             },
             success: function(data){
                     $clicked_btn.removeClass("upvote");
+                    $clicked_btn.removeClass("is-link");
                     $clicked_btn.addClass("downvote");
+                    $clicked_btn.addClass("is-danger");
+
+                    $clicked_btn.text("Ne zanima me")
             }     
         });
         } else if (action == "dislike") {
@@ -148,8 +146,12 @@
                 "MID": match_id
             },
             success: function(data){
-                    $clicked_btn.removeClass("upvote");
-                    $clicked_btn.addClass("downvote");
+                    $clicked_btn.removeClass("downvote");
+                    $clicked_btn.removeClass("is-danger");
+                    $clicked_btn.addClass("upvote");
+                    $clicked_btn.addClass("is-link");
+
+                    $clicked_btn.text("Zanima me")
             }  
         })
         }

@@ -32,7 +32,7 @@ class UserController {
             $user = SkalcaDB::findUserByName($data["USERNAME"]);
             $_SESSION["user_id"] = $user -> PID;
             $_SESSION["username"] = $user -> USERNAME;
-            ViewHelper::render("view/dashboard.php");
+            ViewHelper::redirect(BASE_URL . "");
         } else{
             ViewHelper::render("view/login.php", [
                 "errorMessage" => "Napačno ime ali geslo."

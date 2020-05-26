@@ -84,12 +84,13 @@ class MatchController {
 
     public static function addUpvote(){
         SkalcaDB::addUpvote($_POST["MID"], $_POST["PID"]);
-        SkalcaDB::updateTotalLikesCount($_POST["MID"], true);
+        $type = true;
+        SkalcaDB::updateTotalLikesCount($_POST["MID"], $type);
     }
 
     public static function removeUpvote(){
-        SkalcaDB::addUpvote($_POST["MID"], $_POST["PID"]);
-        SkalcaDB::updateTotalLikesCount($_POST["MID"], false);
+        SkalcaDB::removeUpvote($_POST["MID"], $_POST["PID"]);
+        $type = false;
+        SkalcaDB::updateTotalLikesCount($_POST["MID"], $type ) ;
     }
-
 }
