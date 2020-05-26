@@ -60,25 +60,19 @@
                                     if (!MatchController::userLiked($match["MID"], $_SESSION["user_id"], $likes)):
                                 ?>
                                 <button class="like-btn upvote level-item button is-info" aria-label="like" id="<?= $match["MID"]?>">
-                                    <span class="icon is-small">
-                                    <i class="fas fa-heart" aria-hidden="true"></i>
-                                    </span>
-                                    <span>Zanima me</span>     
+                                    Zanima me     
                                 </button>
                                 <?php
                                     else:
                                 ?>
                                 <!-- if user liked the event -->
                                     <a class="like-btn level-item downvote button is-danger" aria-label="like" id="<?= $match["MID"]?>">
-                                        <span class="icon is-small">
-                                        <i class="fas fa-heart" aria-hidden="true"></i>
-                                        </span>
-                                        <span>Ne zanima me</span>     
+                                        Ne zanima me    
                                     </a>
                                     <?php endif; ?>
                                 <?php endif; ?>
                                 <p class="level-item" aria-label="like">
-                                    <span>Trenutno se dogodek zanima <b><?= $match["LIKES"] ?></b> oseb.</span>    
+                                    <span>Trenutno se dogodek zanima <span style="font-weight: bolder" id="<?= "likesCount" . $match["MID"] ?>"><?= $match["LIKES"] ?></b></span> oseb.</span>    
                                 </div>
                             </nav>
                             </div>
@@ -134,6 +128,7 @@
                     $clicked_btn.addClass("downvote");
                     $clicked_btn.addClass("is-danger");
 
+                    $("#likesCount" + match_id).text(data.LIKES)
                     $clicked_btn.text("Ne zanima me")
             }     
         });
@@ -151,6 +146,7 @@
                     $clicked_btn.addClass("upvote");
                     $clicked_btn.addClass("is-link");
 
+                    $("#likesCount" + match_id).text(data.LIKES)
                     $clicked_btn.text("Zanima me")
             }  
         })

@@ -171,11 +171,6 @@ class SkalcaDB{
         return $statement -> fetch();
     }
 
-    public static function upLikes($MID){
-        // TODO
-        $db = DBinit::getInstance();
-    }
-
     public static function getAllLikes(){
         $db = DBinit::getInstance();
 
