@@ -105,7 +105,18 @@ class SkalcaDB{
         $db = DBInit::getInstance();
         $statement = $db->prepare("DELETE FROM igralci
             WHERE PID = :pid");
+        $statement1 = $db -> prepare("DELETE FROM likes 
+                        WHERE PID=:pid");
+
+        $statement2 = $db -> prepare("DELETE FROM tekme 
+                            WHERE PID=:pid");
+
         $statement -> bindParam(":pid", $PID);
+        $statement1 -> bindParam(":pid", $PID);
+        $statement2 -> bindParam(":pid", $PID);
+
+        $statement1 -> execute();
+        $statement2 -> execute();
         $statement -> execute();
     }
 
@@ -238,6 +249,21 @@ class SkalcaDB{
     $statement -> bindParam(":opis", $OPISTEKME);
 
     $statement -> execute();
+    }
+
+    public static function deleteMatch($MID){
+        $db = DBInit::getInstance();
+        $statement = $db->prepare("DELETE FROM tekme
+                                    WHERE MID = :mid");
+
+        $statement1 = $db -> prepare("DELETE FROM likes 
+                                        WHERE MID=:mid");
+                                        
+        $statement -> bindParam(":mid", $MID);
+        $statement1 -> bindParam(":mid", $MID);
+
+        $statement1 -> execute();
+        $statement -> execute();
     }
 
 }

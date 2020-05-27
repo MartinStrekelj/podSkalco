@@ -162,11 +162,12 @@ class MatchController {
                     self::showEditMatchForm($data, $errors, $data["MID"]);
                 }
             }else{
-                self::showAddForm($data, $errors);
+                self::showEditMatchForm($data, $errors, $data["MID"]);
             }
     }
 
     public static function deleteMatch(){
-
+        SkalcaDB::deleteMatch($_GET["MID"]);
+        ViewHelper::redirect(BASE_URL . "");
     }
 }
