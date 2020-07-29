@@ -66,7 +66,7 @@ class UserController {
         $rules = [
             "USERNAME" => [
                 "filter" => FILTER_VALIDATE_REGEXP,
-                "options" => ["regexp" => "/^[ <a-zA-Z0-9>]+$/"]
+                "options" => ["regexp" => "/^[ [^A-Za-z0-9]+$/"]
             ],
             // we convert HTML special characters
             "PASSWORD" => FILTER_SANITIZE_SPECIAL_CHARS,
@@ -83,20 +83,13 @@ class UserController {
             ],
             "SPOL" => FILTER_SANITIZE_SPECIAL_CHARS
         ];
-
         $data = filter_input_array(INPUT_POST, $rules);
-        
         $hits = SkalcaDB::findUserByName($data["USERNAME"]);
-        
-
         $errors["USERNAME"] = $data["USERNAME"] === false  ? "Izberite si uporabniško ime: dovoljene so samo črke in številke" : "";
         $errors["USERNAME"] = (!empty($hits)) ? "Uporabniško ime že obstaja" : "";
         $errors["PASSWORD"] = empty($data["PASSWORD"]) ? "Vpiši geslo!" : "";
         $errors["PASSWORD"] = !($data["PASSWORD"] == $data["CONFIRM_PASSWORD"]) ? "Gesli se nista ujemali. Bodite pozorni pri črkovanju!" : "";
         $errors["GSM"] = $data["GSM"] === false ? "Vpišite svoj GSM. Številka mora biti sestavljena iz 9števk npr. 041551691" : "";
-
-
-
         $isDataValid = true;
         foreach ($errors as $error) {
             $isDataValid = $isDataValid && empty($error);

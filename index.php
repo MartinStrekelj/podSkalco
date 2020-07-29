@@ -42,6 +42,10 @@ $urls = [
     },
 
     "add-match" => function() {
+        if (!SkalcaDB::userLoggedIn()){
+            throw new Exception("Login required.");
+        }
+
         if ($_SERVER["REQUEST_METHOD"] == "POST"){
             MatchController::addMatch();
         }else{
@@ -50,17 +54,29 @@ $urls = [
     },
 
     "players" => function() {
+        if (!SkalcaDB::userLoggedIn()){
+            throw new Exception("Login required.");
+        }
         RouteController::showPlayers();
     },
     "display_match" => function(){
+        if (!SkalcaDB::userLoggedIn()){
+            throw new Exception("Login required.");
+        }
         MatchController::displayUserMatches();
     },
 
     "logout" => function(){
+        if (!SkalcaDB::userLoggedIn()){
+            throw new Exception("Login required.");
+        }
         UserController::logout();
     },
 
     "edit-profile" => function(){
+        if (!SkalcaDB::userLoggedIn()){
+            throw new Exception("Login required.");
+        }
         if ($_SERVER["REQUEST_METHOD"] == "POST"){
             UserController::editProfile();
         }else{
@@ -69,24 +85,39 @@ $urls = [
     },
 
     "delete-user" => function(){
+        if (!SkalcaDB::userLoggedIn()){
+            throw new Exception("Login required.");
+        }
         if ($_SERVER["REQUEST_METHOD"] == "POST"){
             UserController::deleteUser();
         }
     },
     
     "api/searchUser" => function(){
+        if (!SkalcaDB::userLoggedIn()){
+            throw new Exception("Login required.");
+        }
         UserController::searchApi();
     },
 
     "api/addUpvote" => function(){
+        if (!SkalcaDB::userLoggedIn()){
+            throw new Exception("Login required.");
+        }
         MatchController::addUpvote();
     },
 
     "api/removeUpvote" => function (){
+        if (!SkalcaDB::userLoggedIn()){
+            throw new Exception("Login required.");
+        }
         MatchController::removeUpvote();
     },
 
     "edit-match" => function(){
+        if (!SkalcaDB::userLoggedIn()){
+            throw new Exception("Login required.");
+        }
         if ($_SERVER["REQUEST_METHOD"] == "POST"){
             MatchController::editMatch();
         }else{
@@ -95,6 +126,9 @@ $urls = [
     },
     
     "delete-match" => function(){
+        if (!SkalcaDB::userLoggedIn()){
+            throw new Exception("Login required.");
+        }
         MatchController::deleteMatch();
     }
 

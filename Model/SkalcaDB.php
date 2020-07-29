@@ -266,4 +266,8 @@ class SkalcaDB{
         $statement -> execute();
     }
 
+    public static function userLoggedIn(){
+        return isset($_SESSION["user_id"]);
+    }
+
 }

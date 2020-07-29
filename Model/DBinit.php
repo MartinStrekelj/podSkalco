@@ -4,7 +4,7 @@ class DBinit {
     private static $host = "localhost";
     private static $user = "root";
     private static $password = "";
-    private static $schema = "PodSkalco";
+    private static $schema = "mydb";
     private static $instance = null;
 
 
